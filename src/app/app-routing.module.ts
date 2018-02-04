@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './feature-modules/login/components/login.component';
+import { AuthGuard } from './feature-modules/login/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: 'app/feature-modules/login/login.module#LoginModule'
-  },
-  {
     path: 'trade-history',
-    loadChildren: 'app/feature-modules/trade-history/trade-history.module#TradeHistoryModule'
+    loadChildren: 'app/feature-modules/trade-history/trade-history.module#TradeHistoryModule',
+    canActivate: [AuthGuard]
   },
   {
     path: '',
-    redirectTo: '',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];
