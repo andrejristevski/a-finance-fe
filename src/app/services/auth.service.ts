@@ -12,10 +12,6 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         return value;
-      })
-      .catch(err => {
-        console.log('bad sign up');
-        console.log(err);
       });
   }
 
@@ -25,10 +21,8 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(value => {
         return value;
-      })
-      .catch(err => {
-        console.error(err);
       });
+
   }
 
   logout() {

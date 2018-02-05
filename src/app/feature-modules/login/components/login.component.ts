@@ -28,8 +28,13 @@ export class LoginComponent implements OnInit {
   signup() {
     this.authService.signup(this.userName, this.password)
       .then(res => {
+        debugger;
         localStorage.setItem('user', JSON.stringify(res));
         this.router.navigateByUrl('/trade-history');
+      })
+      .catch(err => {
+        debugger;
+        console.error(err);
       });
     this.userName = this.password = '';
   }
@@ -39,6 +44,10 @@ export class LoginComponent implements OnInit {
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res));
         this.router.navigateByUrl('/trade-history');
+      })
+      .catch(err => {
+        debugger;
+        console.error(err);
       });
     this.userName = this.password = '';
   }

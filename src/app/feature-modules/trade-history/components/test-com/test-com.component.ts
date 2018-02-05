@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-test-com',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService,
+  private router: Router) { }
 
   ngOnInit() {
   }
 
+  signOut() {
+    localStorage.removeItem('user');
+    this.router.navigateByUrl('login');
+  }
 }
