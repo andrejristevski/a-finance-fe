@@ -1,9 +1,6 @@
-<!-- <h1>
-  {{title}}
-</h1>
-
-<button routerLink="/login">login</button>
-<button routerLink="/trade-history">trade history</button>
-<button routerLink="">Home</button> -->
-
+<nav *ngIf="router.url !== '/login'">
+  <button routerLink="/login">login</button>
+  <button routerLink="/trade-history">trade history</button>
+  <button routerLink="">Home</button>
+</nav>
 <router-outlet></router-outlet>

@@ -16,6 +16,7 @@ export class TestComComponent implements OnInit {
   }
 
   signOut() {
+    this.authService.logout();
     localStorage.removeItem('user');
     this.router.navigateByUrl('login');
   }
