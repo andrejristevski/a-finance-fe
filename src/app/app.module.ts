@@ -12,6 +12,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthGuard } from './feature-modules/login/auth.guard';
+import { NavbarModule } from './feature-modules/navbar/navbar.module';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AuthGuard } from './feature-modules/login/auth.guard';
   ],
   imports: [
     BrowserModule,
+    NavbarModule,
     LoginModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
