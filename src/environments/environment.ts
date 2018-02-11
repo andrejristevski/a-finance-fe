@@ -4,7 +4,13 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
+  production: true,
+  baseUrl: 'http://localhost:5000',
+  curPairPath: 'rates',
+  strength: 'strength',
+  percentagesum: 'percentagesum',
+  initialInputCur: 'EUR',
+  initialOutputCur: 'AUD',
   firebase: {
     apiKey: 'AIzaSyDu_gbNfdaLrF0RTJayYUlhs78nW1jT3O0',
     authDomain: 'andrej-finance.firebaseapp.com',
@@ -14,3 +20,10 @@ export const environment = {
     messagingSenderId: '637776522432'
   }
 };
+export const ChartType = {
+  'PAIR': 'PairData',
+  'CURRENCY_STRENGTH': 'Percentage strength',
+  'PERCENTAGE_SUM': 'Percentage sum',
+};
+
+export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY'];

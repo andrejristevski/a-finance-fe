@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <div class="row">
+    <app-create-chart class="col-xs-6"></app-create-chart>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div *ngFor="let chart of charts">
+    </div>
+    <app-chartjschart *ngFor="let chart of charts" [(data)]="chart.data" [(id)]="chart.id" class="col-xs-12">
+    </app-chartjschart>
+  </div>
+</div>

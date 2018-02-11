@@ -14,10 +14,4 @@ export class TestComComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  signOut() {
-    this.authService.logout();
-    localStorage.removeItem('user');
-    this.router.navigateByUrl('login');
-  }
 }

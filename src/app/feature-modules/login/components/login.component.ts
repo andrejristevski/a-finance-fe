@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userName = 'andrej.rist@gmail.com';
-  password;
+  password = 'dwahvio';
 
   constructor(private authService: AuthService,
     private router: Router) { }
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.signup(this.userName, this.password)
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res));
-        this.router.navigateByUrl('/trade-history');
+        this.router.navigateByUrl('/dashboard');
       })
       .catch(err => {
         console.error(err);
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.userName, this.password)
       .then(res => {
         localStorage.setItem('user', JSON.stringify(res));
-        this.router.navigateByUrl('/trade-history');
+        this.router.navigateByUrl('/dashboard');
       })
       .catch(err => {
         debugger;

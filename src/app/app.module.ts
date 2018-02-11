@@ -13,6 +13,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthGuard } from './feature-modules/login/auth.guard';
 import { NavbarModule } from './feature-modules/navbar/navbar.module';
+import { HttpModule } from '@angular/http';
+
+import { DataService } from './services/data.service';
+import { ChartService } from './services/chart.service';
+import { NetworkService } from './services/network.service';
 
 
 @NgModule({
@@ -23,12 +28,13 @@ import { NavbarModule } from './feature-modules/navbar/navbar.module';
     BrowserModule,
     NavbarModule,
     LoginModule,
+    HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
