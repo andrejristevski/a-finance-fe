@@ -2,24 +2,13 @@
   <div class="col-md-3 h4">
     Select input
   </div>
-  <ss-multiselect-dropdown 
-    class="col-md-3"
-    [disabled]="chartTypeSelected[0]==2"
-    [options]="inputCurrencies" 
-    [texts]="inpCurTexts" 
-    [settings]="inpCurSettings" 
-    [(ngModel)]="inpCurSelected" 
-    (ngModelChange)="onChange($event)">
+  <ss-multiselect-dropdown class="col-md-3" [disabled]="chartTypeSelected[0]==2" [options]="inputCurrencies" [texts]="inpCurTexts"
+    [settings]="inpCurSettings" [(ngModel)]="inpCurSelected" (ngModelChange)="onChange($event)">
   </ss-multiselect-dropdown>
   <div class="col-md-3 h4">
     Chart type
   </div>
-  <ss-multiselect-dropdown 
-    class="col-md-3"
-    [options]="chartTypes" 
-    [texts]="inpCurTexts" 
-    [settings]="inpCurSettings" 
-    [(ngModel)]="chartTypeSelected" 
+  <ss-multiselect-dropdown class="col-md-3" [options]="chartTypes" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected"
     (ngModelChange)="onChange($event)">
   </ss-multiselect-dropdown>
 </div>
@@ -31,11 +20,7 @@
   </div>
 
   <div class="col-xs-3 pic">
-    <ss-multiselect-dropdown 
-      [options]="outputCurrencies" 
-      [texts]="inpCurTexts" 
-      [settings]="outCurSettings" 
-      [(ngModel)]="outputCurSelected" 
+    <ss-multiselect-dropdown [options]="outputCurrencies" [texts]="inpCurTexts" [settings]="outCurSettings" [(ngModel)]="outputCurSelected"
       (ngModelChange)="onChange($event)">
     </ss-multiselect-dropdown>
   </div>
@@ -45,8 +30,10 @@
 <timeframe-buttons (selected)="setDate($event)"></timeframe-buttons>
 
 <br>
-<!-- <ngx-datepicker [(ngModel)]="startDate"></ngx-datepicker> -->
-<!-- <ngx-datepicker [(ngModel)]="endDate"></ngx-datepicker> -->
+
+
+<ng-datepicker [(ngModel)]="startDate"></ng-datepicker>
+<ng-datepicker [(ngModel)]="endDate"></ng-datepicker>
 <br>
 <button type="button" (click)="createChart()" class="btn btn-success">Create</button>
 <button type="button" (click)="a()" class="btn btn-success">Default call</button>

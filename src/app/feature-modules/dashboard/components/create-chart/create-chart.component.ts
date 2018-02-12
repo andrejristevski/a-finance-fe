@@ -108,17 +108,17 @@ export class CreateChartComponent implements OnInit {
   getMappedCallValues() {
 
     const inpCur = this.inpCurSelected
-      .map(index => this.inputCurrencies[index].name)[0]
+      .map(index => this.inputCurrencies[index].name)[0];
     const outCurrencies = this.outputCurSelected
-      .map(index => this.outputCurrencies[index].name)
+      .map(index => this.outputCurrencies[index].name);
     const chartTypeString = this.chartTypeSelected
-      .map(index => this.chartTypes[index].name)[0]
+      .map(index => this.chartTypes[index].name)[0];
 
-    return { inpCur, outCurrencies, chartTypeString }
+    return { inpCur, outCurrencies, chartTypeString };
   }
 
   getIMultiSelectOptionFromStringArray(values) {
-    let res = [];
+    const res = [];
     values.forEach((element, i) => {
       res.push(
         {

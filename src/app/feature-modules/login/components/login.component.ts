@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/dashboard');
       })
       .catch(err => {
-        debugger;
         console.error(err);
       });
     this.userName = this.password = '';

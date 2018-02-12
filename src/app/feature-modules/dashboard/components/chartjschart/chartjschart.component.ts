@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ChartService } from '../../../../services/chart.service';
 import { ChartUtils } from './chartUtils';
 
-import Chart from 'chart.js';
+import { Chart } from 'chart.js';
 
 // Refactor the name to chart component it doesnt need to be Chartjs
 @Component({

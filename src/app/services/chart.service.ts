@@ -41,12 +41,11 @@ export class ChartService {
     }
   }
 
-  createChart(inp, out, startDate, endDate, type = "PairData") {
-    let obs = this.getResults(startDate, endDate, inp, out, type);
-    console.log(`Creating chart with ${type}`)
-
+  createChart(inp, out, startDate, endDate, type = 'PairData') {
+    const obs = this.getResults(startDate, endDate, inp, out, type);
+    console.log(`Creating chart with ${type}`);
     obs.subscribe(data => {
-      this.charts.push({ id: (Math.random() * 10).toFixed(8), data })
+      this.charts.push({ id: (Math.random() * 10).toFixed(8), data });
     });
   }
 
