@@ -1,40 +1,49 @@
-<div class="row">
-  <div class="col-md-3 h4">
-    Select input
-  </div>
-  <ss-multiselect-dropdown class="col-md-3" [disabled]="chartTypeSelected[0]==2" [options]="inputCurrencies" [texts]="inpCurTexts"
-    [settings]="inpCurSettings" [(ngModel)]="inpCurSelected" (ngModelChange)="onChange($event)">
-  </ss-multiselect-dropdown>
-  <div class="col-md-3 h4">
-    Chart type
-  </div>
-  <ss-multiselect-dropdown class="col-md-3" [options]="chartTypes" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected"
-    (ngModelChange)="onChange($event)">
-  </ss-multiselect-dropdown>
-</div>
+<div class="">
 
-<br>
-<div class="row">
-  <div class="col-xs-3 h4">
-    Select outptut/s
-  </div>
-
-  <div class="col-xs-3 pic">
-    <ss-multiselect-dropdown [options]="outputCurrencies" [texts]="inpCurTexts" [settings]="outCurSettings" [(ngModel)]="outputCurSelected"
+  <div class="row">
+    <div class="col-3 h4 ml-2">
+      Select input
+    </div>
+    <ss-multiselect-dropdown class="col-3" [disabled]="chartTypeSelected[0]==2" [options]="inputCurrencies" [texts]="inpCurTexts"
+      [settings]="inpCurSettings" [(ngModel)]="inpCurSelected" (ngModelChange)="onChange($event)">
+    </ss-multiselect-dropdown>
+    <div class="col-3 h4">
+      Chart type
+    </div>
+    <ss-multiselect-dropdown class="" [options]="chartTypes" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected"
       (ngModelChange)="onChange($event)">
     </ss-multiselect-dropdown>
   </div>
+
+  <br>
+  <div class="row ">
+    <div class="col-3 h4 ml-2">
+      Select outptut/s
+    </div>
+
+    <div class="col-3  ">
+      <ss-multiselect-dropdown [options]="outputCurrencies" [texts]="inpCurTexts" [settings]="outCurSettings" [(ngModel)]="outputCurSelected"
+        (ngModelChange)="onChange($event)">
+      </ss-multiselect-dropdown>
+    </div>
+  </div>
+  <br>
+
+  <timeframe-buttons class="ml-2" (selected)="setDate($event)"></timeframe-buttons>
+
+  <br>
+  <div class="ml-2 mt-3">
+    <ng-datepicker [(ngModel)]="startDate"></ng-datepicker>
+    <!-- <ngx-datepicker [(ngModel)]="endDate"></ngx-datepicker> -->
+    <div class="mt-1">
+      <!-- <ngx-datepicker [(ngModel)]="endDate"></ngx-datepicker> -->
+      <ng-datepicker [(ngModel)]="endDate"></ng-datepicker>
+    </div>
+  </div>
+  <br>
+  <div class="ml-2">
+    <button type="button" (click)="createChart()" class="btn btn-success">Create</button>
+    <button type="button" (click)="a()" class="btn btn-success">Default call</button>
+    <button type="button" (click)="post()" class="btn btn-success">post</button>
+  </div>
 </div>
-<br>
-
-<timeframe-buttons (selected)="setDate($event)"></timeframe-buttons>
-
-<br>
-
-
-<ng-datepicker [(ngModel)]="startDate"></ng-datepicker>
-<ng-datepicker [(ngModel)]="endDate"></ng-datepicker>
-<br>
-<button type="button" (click)="createChart()" class="btn btn-success">Create</button>
-<button type="button" (click)="a()" class="btn btn-success">Default call</button>
-<button type="button" (click)="post()" class="btn btn-success">post</button>

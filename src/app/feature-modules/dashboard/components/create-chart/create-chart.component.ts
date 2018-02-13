@@ -50,6 +50,7 @@ export class CreateChartComponent implements OnInit {
   outCurSettings: IMultiSelectSettings = {
     checkedStyle: 'fontawesome',
     buttonClasses: 'btn btn-default btn-block',
+    itemClasses: 'text-dark bg-light',
     showCheckAll: true,
     showUncheckAll: true,
   };
