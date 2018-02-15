@@ -1,24 +1,19 @@
 <div class="row">
-  <nav *ngIf="router.url !== '/login'" class="navbar col-12  navbar-expand-sm bg-primary  navbar-light bg-faded">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav *ngIf="router.url !== '/login'" class="navbar col-12  navbar-expand-sm bg-secondary  navbar-light bg-faded">
 
-    <!-- Links -->
 
-    <div class="collapse navbar-collapse float-right">
+    <div class="navbar-nav mr-auto">
+      <div class="nav-item ml-3">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="/trade-history">Trade history</a>
+      </div>
+    </div>
+    <div class="navbar-nav ml-auto">
 
-      <div class="navbar-nav mr-auto">
-        <div class="nav-item">
-          <a class="nav-link" href="/dashboard">Dashboard</a>
-        </div>
-        <div class="nav-item">
-          <a class="nav-link" href="/trade-history">Trade history</a>
-        </div>
-        <div class="nav-item float-right">
-          <a class="nav-link" href="/login" (click)="signOut()">Signout</a>
-        </div>
+      <div class="navbar-item mr-3">
+        <a class="nav-link" href="/login" (click)="signOut()">Signout</a>
       </div>
     </div>
   </nav>
