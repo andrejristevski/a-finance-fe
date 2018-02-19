@@ -8,7 +8,7 @@ import { Chart } from 'chart.js';
 @Component({
   selector: 'app-chartjschart',
   templateUrl: './chartjschart.component.html',
-  styleUrls: ['./chartjschart.component.css'],
+  styleUrls: ['./chartjschart.component.scss'],
   providers: [ChartUtils]
 })
 export class ChartComponent implements OnInit {

@@ -7,7 +7,7 @@ import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'ang
 @Component({
   selector: 'app-create-chart',
   templateUrl: './create-chart.component.html',
-  styleUrls: ['./create-chart.component.css']
+  styleUrls: ['./create-chart.component.scss']
 })
 export class CreateChartComponent implements OnInit {
 

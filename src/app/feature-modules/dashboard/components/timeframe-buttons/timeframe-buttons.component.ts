@@ -3,7 +3,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'timeframe-buttons',
   templateUrl: './timeframe-buttons.component.html',
-  styleUrls: ['./timeframe-buttons.component.css']
+  styleUrls: ['./timeframe-buttons.component.scss']
 })
 export class TimeframeButtonsComponent implements OnInit {
 

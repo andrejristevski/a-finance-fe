@@ -2,3 +2,10 @@
 .ngx-datepicker-calendar-container {
     z-index: 10000;
 }
+
+ss-multiselect-dropdown {
+    & .dropdown-item.active,
+    & .dropdown-item:active {
+      background-color: #e5e5e5
+    }
+  }
