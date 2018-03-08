@@ -18,6 +18,7 @@ import { HttpModule } from '@angular/http';
 import { DataService } from './services/data.service';
 import { ChartService } from './services/chart.service';
 import { NetworkService } from './services/network.service';
+import { UserSettingsService } from './services/user-settings-service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { NetworkService } from './services/network.service';
     AngularFireAuthModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService],
+  providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService, UserSettingsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

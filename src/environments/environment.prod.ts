@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   baseUrl: 'http://localhost:5000',
+  // baseUrl: 'https://a-rates.herokuapp.com',
   curPairPath: 'rates',
   strength: 'strength',
   percentagesum: 'percentagesum',

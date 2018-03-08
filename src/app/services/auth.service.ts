@@ -28,4 +28,8 @@ export class AuthService {
   logout() {
     this.firebaseAuth.auth.signOut();
   }
+
+  getCurrentUser() {
+
+  }
 }

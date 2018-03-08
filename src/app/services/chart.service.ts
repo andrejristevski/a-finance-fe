@@ -28,7 +28,7 @@ export class ChartService {
   }
 
   createDefault() {
-    this.createChart("EUR", ["CAD", "AUD", "USD"], new Date(2016, 1, 20), new Date());
+    this.createChart('EUR', ['CAD', 'AUD', 'USD'], new Date(2016, 1, 20), new Date());
   }
 
   deleteChart(id) {
@@ -50,24 +50,23 @@ export class ChartService {
   }
 
   getResults(startDate, endDate, inp, out, type) {
-    let { startDateString, endDateString } = this.getDatesStrings(startDate, endDate)
+    const { startDateString, endDateString } = this.getDatesStrings(startDate, endDate);
     return this.handlers[type](startDateString, endDateString, inp, out);
   }
 
   getDatesStrings(startDate, endDate) {
-    let sy = startDate.getFullYear();
-    let ey = endDate.getFullYear();
+    const sy = startDate.getFullYear();
+    const ey = endDate.getFullYear();
 
-    let sm = (startDate.getMonth() + 1) < 10 ? '0' + (startDate.getMonth() + 1) : startDate.getMonth() + 1;
-    let em = (endDate.getMonth() + 1) < 10 ? '0' + (endDate.getMonth() + 1) : endDate.getMonth() + 1;
+    const sm = (startDate.getMonth() + 1) < 10 ? '0' + (startDate.getMonth() + 1) : startDate.getMonth() + 1;
+    const em = (endDate.getMonth() + 1) < 10 ? '0' + (endDate.getMonth() + 1) : endDate.getMonth() + 1;
 
-    let sdA = startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate();
-    let edA = endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate();
+    const sdA = startDate.getDate() < 10 ? '0' + startDate.getDate() : startDate.getDate();
+    const edA = endDate.getDate() < 10 ? '0' + endDate.getDate() : endDate.getDate();
 
-    let startDateString = `${sy}-${sm}-${sdA}`;
-    let endDateString = `${ey}-${em}-${edA}`;
-    return { startDateString, endDateString }
-
+    const startDateString = `${sy}-${sm}-${sdA}`;
+    const endDateString = `${ey}-${em}-${edA}`;
+    return { startDateString, endDateString };
   }
 }
 
