@@ -5,31 +5,20 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class UserSettingsService {
 
     private usersDbPath = 'users';
-    users: any;
+    private itemRef;
 
     constructor(private db: AngularFireDatabase) {
-        this.users = this.db.list(this.usersDbPath);
-    }
-
-    createUserSettings() {
-
-    }
-
-    updateUserSettings() {
-
+        // this.users = this.db.list(this.usersDbPath);
+        const userId = JSON.parse(localStorage.getItem('user')).uid;
+        this.itemRef = this.db.object(`${this.usersDbPath}/${userId}}`);
     }
 
     getUserSettings() {
+        return this.itemRef.snapshotChanges();
+    }
 
-
-        const userId = JSON.parse(localStorage.getItem('user')).uid;
-        const itemRef = this.db.object(`${this.usersDbPath}/${userId}}`);
-
-        const data = itemRef.snapshotChanges()
-            .subscribe(action => {
-                const asd = action.payload.val();
-                debugger;
-            });
+    saveChartsSettingsForUser(settings) {
+        this.itemRef.set({ chartSettings: settings });
     }
 
 }

@@ -13,7 +13,12 @@ export class DashboardComponent implements OnInit {
   charts = this.chartService.getCharts();
 
   constructor(private chartService: ChartService, private userSettingsService: UserSettingsService) {
-    this.userSettingsService.getUserSettings();
+
+    // this.userSettingsService.getUserSettings();
+  }
+
+  saveCharts() {
+    this.chartService.saveCharts();
   }
 
   ngOnInit() {
