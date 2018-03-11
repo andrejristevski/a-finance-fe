@@ -89,8 +89,6 @@ export class CreateChartComponent implements OnInit {
     this.chartService.createDefault();
   }
 
-
-
   post() {
   }
 

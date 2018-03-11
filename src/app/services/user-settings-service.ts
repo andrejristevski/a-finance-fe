@@ -20,9 +20,16 @@ export class UserSettingsService {
     }
 
     getUserSettings() {
+
+
         const userId = JSON.parse(localStorage.getItem('user')).uid;
-        debugger;
-        this.db.object(`${this.usersDbPath}/${userId}}`);
+        const itemRef = this.db.object(`${this.usersDbPath}/${userId}}`);
+
+        const data = itemRef.snapshotChanges()
+            .subscribe(action => {
+                const asd = action.payload.val();
+                debugger;
+            });
     }
 
 }
