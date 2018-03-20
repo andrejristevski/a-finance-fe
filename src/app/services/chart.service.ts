@@ -11,7 +11,6 @@ import { ChartType } from '../../environments/environment';
 export class ChartService {
 
   charts = [];
-  chartsSettings = [];
 
   handlers = {
     [ChartType.PAIR]: (startDate, endDate, inpCur, outCur): Observable<any> =>
@@ -31,17 +30,18 @@ export class ChartService {
     this.settingsService.getUserSettings()
       .subscribe(action => {
         const settings = action.payload.val();
-
         this.generateCharts(settings.chartSettings);
       });
   }
 
+
   generateCharts(chartsSettings) {
-    this.chartsSettings = chartsSettings;
     chartsSettings.forEach(cs => {
       const startDate = new Date(cs.startDate);
       const endDate = new Date(cs.endDate);
-      this.createChart(cs.inp, cs.out, startDate, endDate, cs.type);
+      if (this.charts.filter(c => c.id === cs.id).length === 0) {
+        this.createChart(cs.inp, cs.out, startDate, endDate, cs.type, cs.id);
+      }
     });
   }
 
@@ -54,7 +54,6 @@ export class ChartService {
   }
 
   deleteChart(id) {
-
     for (let i = 0; i < this.charts.length; i++) {
       if (this.charts[i].id === id) {
         this.charts.splice(i, 1);
@@ -63,16 +62,23 @@ export class ChartService {
     }
   }
 
-  createChart(inp, out, startDate, endDate, type = 'PairData') {
+  createChart(inp, out, startDate, endDate, type = 'PairData', id?) {
     const obs = this.getResults(startDate, endDate, inp, out, type);
+
     const chartSettings = {
       inp, out, startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(), type
+      endDate: endDate.toISOString(), type, id: undefined
     };
+
+    if (id) {
+      chartSettings.id = id;
+    } else {
+      chartSettings.id = (Math.random() * 10).toFixed(8);
+    }
+
     console.log(`Creating chart with ${type}`);
     obs.subscribe(data => {
-      this.chartsSettings.push(chartSettings);
-      this.charts.push({ id: (Math.random() * 10).toFixed(8), data });
+      this.charts.push({ id: chartSettings.id, data, chartSettings });
     });
   }
 
@@ -98,7 +104,10 @@ export class ChartService {
 
   saveCharts() {
 
-    this.settingsService.saveChartsSettingsForUser(this.chartsSettings);
+    const chartsSettings = this.charts
+      .map(chart => chart.chartSettings);
+    // this.charts = [];
+    this.settingsService.saveChartsSettingsForUser(chartsSettings);
 
   }
 
