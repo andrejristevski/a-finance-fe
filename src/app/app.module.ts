@@ -20,6 +20,7 @@ import { ChartService } from './services/chart.service';
 import { NetworkService } from './services/network.service';
 import { UserSettingsService } from './services/user-settings-service';
 
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,17 @@ import { UserSettingsService } from './services/user-settings-service';
     NavbarModule,
     LoginModule,
     HttpModule,
+    SnotifyModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService, UserSettingsService],
+  providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService, 
+    UserSettingsService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,8 @@
     z-index: 10000;
 }
 
+@import "~ng-snotify/styles/material";
+
 ss-multiselect-dropdown {
     & .dropdown-item.active,
     & .dropdown-item:active {

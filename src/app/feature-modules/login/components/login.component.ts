@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SnotifyService } from 'ng-snotify';
+import { notificationOptions } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
   password = 'testte';
 
   constructor(private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private notif: SnotifyService) { }
 
   ngOnInit() {
   }
@@ -33,6 +36,7 @@ export class LoginComponent implements OnInit {
       })
       .catch(err => {
         console.error(err);
+        this.notif.error('error signin up', notificationOptions);
       });
     this.userName = this.password = '';
   }
@@ -45,6 +49,7 @@ export class LoginComponent implements OnInit {
       })
       .catch(err => {
         console.error(err);
+        this.notif.error('error login in', notificationOptions);
       });
     this.userName = this.password = '';
   }

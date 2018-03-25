@@ -27,3 +27,11 @@ export const ChartType = {
 };
 
 export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY'];
+
+export const notificationOptions = {
+  timeout: 5000,
+  showProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  position: 'centerTop',
+};

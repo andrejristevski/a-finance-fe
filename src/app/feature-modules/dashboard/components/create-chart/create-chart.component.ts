@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../services/data.service';
 import { ChartService } from '../../../../services/chart.service';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
-
+import { SnotifyService } from 'ng-snotify';
+import { notificationOptions } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-create-chart',
@@ -11,7 +12,8 @@ import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'ang
 })
 export class CreateChartComponent implements OnInit {
 
-  constructor(private service: DataService, private chartService: ChartService) {
+  constructor(private service: DataService, private chartService: ChartService,
+    private notif: SnotifyService) {
   }
 
   today = new Date();
@@ -90,6 +92,7 @@ export class CreateChartComponent implements OnInit {
   }
 
   post() {
+    this.notif.success('Success', notificationOptions);
   }
 
   createChart() {
