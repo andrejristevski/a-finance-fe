@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:5000',
+  baseUrl: 'https://enigmatic-fjord-76871.herokuapp.com',
   curPairPath: 'rates',
   strength: 'strength',
   percentagesum: 'percentagesum',
