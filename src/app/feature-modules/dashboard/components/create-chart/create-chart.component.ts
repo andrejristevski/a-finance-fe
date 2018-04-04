@@ -65,9 +65,13 @@ export class CreateChartComponent implements OnInit {
     this.chartTypes =
       this.getIMultiSelectOptionFromStringArray(this.service.getChartTypes());
   }
+  chartChanged() {
+    this.inpCurSelected = [0];
+    this.outputCurSelected = [2];
+  }
 
   onChange() {
-    if (this.chartTypeSelected[0] === 2) {
+    if (this.chartTypeSelected[0] === 1) {
       this.outputCurrencies = this.getIMultiSelectOptionFromStringArray(
         this.service.getSuportedOutputCurPerSum());
       // this.outputCurSelected = [0]

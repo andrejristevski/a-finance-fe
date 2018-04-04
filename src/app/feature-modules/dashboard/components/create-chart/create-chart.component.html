@@ -11,7 +11,7 @@
       Chart type
     </div>
     <ss-multiselect-dropdown class="" [options]="chartTypes" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected"
-      (ngModelChange)="onChange($event)">
+      (ngModelChange)="chartChanged($event)">
     </ss-multiselect-dropdown>
   </div>
 

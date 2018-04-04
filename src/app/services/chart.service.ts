@@ -17,8 +17,8 @@ export class ChartService {
       this.networkService.getDataForCurrencyPair(startDate, endDate, inpCur, outCur),
     [ChartType.CURRENCY_STRENGTH]: (startDate, endDate, inpCur, outCur): Observable<any> =>
       this.networkService.getCurrencyStrength(startDate, endDate, inpCur, outCur),
-    [ChartType.PERCENTAGE_SUM]: (startDate, endDate, inpCur, outCur): Observable<any> =>
-      this.networkService.getPercentageSum(startDate, endDate, inpCur, outCur),
+    // [ChartType.PERCENTAGE_SUM]: (startDate, endDate, inpCur, outCur): Observable<any> =>
+    //   this.networkService.getPercentageSum(startDate, endDate, inpCur, outCur),
 
   };
 

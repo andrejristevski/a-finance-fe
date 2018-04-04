@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
 import { ChartService } from '../../../../services/chart.service';
 import { ChartUtils } from './chartUtils';
 
@@ -28,6 +28,7 @@ export class ChartComponent implements OnInit {
 
   ngOnInit() { }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
     const datasets = this.chartUtils.getChartVal(this.data.datasets);
     this.createChart(this.data.labels, datasets, this.data.average);

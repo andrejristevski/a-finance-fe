@@ -28,8 +28,8 @@ export class NetworkService {
       post(`${environment['baseUrl']}/${environment['strength']}`, {
         startDate: sd,
         endDate: ed,
-        inpCur,
-        outCur,
+        inp: inpCur,
+        out: outCur
       }).map((res: Response) => {
         return res.json();
       });
