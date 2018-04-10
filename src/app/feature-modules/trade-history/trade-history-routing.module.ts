@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TestComComponent } from './components/test-com/test-com.component';
+import { TradeHistoryComponent } from './components/trade-history/trade-history.component';
 import { AuthGuard } from '../login/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: TestComComponent,
+    component: TradeHistoryComponent,
     canActivate: [AuthGuard]
   },
 ];

@@ -25,4 +25,17 @@ export class DataService {
   getSuportedOutputCurPerSum() {
     return PercentageSumCur;
   }
+
+  getIMultiSelectOptionFromStringArray(values) {
+    const res = [];
+    values.forEach((element, i) => {
+      res.push(
+        {
+          id: i,
+          name: element
+        });
+    });
+    return res;
+
+  }
 }

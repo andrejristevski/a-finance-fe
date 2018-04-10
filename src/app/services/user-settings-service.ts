@@ -29,4 +29,12 @@ export class UserSettingsService {
             });
     }
 
+    saveExchangeForUser(exchange) {
+
+    }
+
+    getUserExchanges() {
+
+    }
+
 }
