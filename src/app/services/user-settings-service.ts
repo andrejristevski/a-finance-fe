@@ -6,14 +6,16 @@ import { SnotifyService } from 'ng-snotify';
 @Injectable()
 export class UserSettingsService {
 
-    private usersDbPath = 'users';
+    private usersDbPath = 'chart-settings';
     private itemRef;
+    private exchangesDbPath = 'exchanges';
+    private exchangesRef;
 
     constructor(private db: AngularFireDatabase,
         private notif: SnotifyService) {
-        // this.users = this.db.list(this.usersDbPath);
         const userId = JSON.parse(localStorage.getItem('user')).uid;
         this.itemRef = this.db.object(`${this.usersDbPath}/${userId}}`);
+        this.exchangesRef = this.db.list(`${this.exchangesDbPath}/${userId}}`);
     }
 
     getUserSettings() {
@@ -30,11 +32,22 @@ export class UserSettingsService {
     }
 
     saveExchangeForUser(exchange) {
-
+        this.exchangesRef.push(exchange)
+            .then(suc => {
+                this.notif.success('Charts settings saved', notificationOptions);
+            }).catch(err => {
+                this.notif.error('Error while saving charts', notificationOptions);
+            });
+        // this.itemRef.update({ exchanges: exchange })
+        //     .then(suc => {
+        //         this.notif.success('Charts settings saved', notificationOptions);
+        //     }).catch(err => {
+        //         this.notif.error('Error while saving charts', notificationOptions);
+        //     });
     }
 
     getUserExchanges() {
-
+       return this.exchangesRef.snapshotChanges();
     }
 
 }

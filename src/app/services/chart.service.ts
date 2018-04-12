@@ -22,8 +22,6 @@ export class ChartService {
 
   };
 
-
-
   constructor(private networkService: NetworkService,
     private settingsService: UserSettingsService) {
 

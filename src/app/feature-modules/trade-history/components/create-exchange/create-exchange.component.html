@@ -11,7 +11,7 @@
   </div>
 
   <div class="row  form-group">
-    <label for="out-cur" class="col-3 ">From</label>
+    <label for="out-cur" class="col-3 ">To</label>
     <div class="col-3 ">
       <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="outCurSelected"
         id="out-cur">
@@ -22,14 +22,21 @@
   <div class="form-group row">
     <label for="sum-input" class="col-3  col-form-label">Sum</label>
     <div class="col-3">
-      <input class="form-control" type="number" [(ngModel)]="sum"  id="sum-input">
+      <input class="form-control" type="number" [(ngModel)]="sum" id="sum-input">
     </div>
   </div>
 
   <div class="form-group row">
     <label for="rate-input" class="col-3  col-form-label">Exchange rate</label>
     <div class="col-3">
-      <input class="form-control" type="number" [(ngModel)]="exchangeRate"  id="rate-input">
+      <input class="form-control" type="number" [(ngModel)]="exchangeRate" id="rate-input">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="rate-input" class="col-3  col-form-label">Date</label>
+    <div class="col-3">
+      <ng-datepicker [(ngModel)]="date"></ng-datepicker>
     </div>
   </div>
 

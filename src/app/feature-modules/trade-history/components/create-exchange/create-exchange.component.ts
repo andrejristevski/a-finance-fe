@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { DataService } from '../../../../services/data.service';
+import { UserSettingsService } from '../../../../services/user-settings-service';
 
 @Component({
   selector: 'app-create-exchange',
@@ -9,13 +10,15 @@ import { DataService } from '../../../../services/data.service';
 })
 export class CreateExchangeComponent implements OnInit {
 
-  constructor(private chartsDataservice: DataService) { }
+  constructor(private chartsDataservice: DataService,
+    private userDataService: UserSettingsService) { }
 
   inpCurSelected: number[];
   outCurSelected: number[];
   inputCurrencies: IMultiSelectOption[];
   sum;
   exchangeRate;
+  date = new Date();
 
   inpCurSettings: IMultiSelectSettings = {
     checkedStyle: 'fontawesome',
@@ -43,6 +46,13 @@ export class CreateExchangeComponent implements OnInit {
   }
 
   createExchange() {
-    debugger;
+    const exchange = {
+      sum: this.sum,
+      exchangeRate: this.exchangeRate,
+      inputCcy: this.inputCurrencies[this.inpCurSelected[0]].name,
+      outCcy: this.inputCurrencies[this.outCurSelected[0]].name,
+      date: this.date.toISOString().split('T')[0]
+    };
+    this.userDataService.saveExchangeForUser(exchange);
   }
 }

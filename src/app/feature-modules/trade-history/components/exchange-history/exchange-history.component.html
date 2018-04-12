@@ -1,0 +1,26 @@
+<div class="exchange-history-comp">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Sum</th>
+        <th scope="col">Exchange rate</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exchange of exchanges; let i = index">
+        <td>{{i}}</td>
+        <td>{{exchange.inputCcy}}</td>
+        <td>{{exchange.outCcy}}</td>
+        <td>{{exchange.sum}}</td>
+        <td>{{exchange.exchangeRate}}</td>
+        <td>{{exchange.date}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</div>
