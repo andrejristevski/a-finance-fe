@@ -10,6 +10,7 @@ import { TimeframeButtonsComponent } from './components/timeframe-buttons/timefr
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { NgDatepickerModule } from 'ng2-datepicker';
+import { HelpersModule } from '../helpers/helpers.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';
     MultiselectDropdownModule,
     FormsModule,
     NgDatepickerModule,
+    HelpersModule,
     DashboardRoutingModule
   ],
   declarations: [DashboardComponent, CreateChartComponent, ChartComponent,

@@ -6,10 +6,12 @@
       <button (click)="saveCharts()" class="btn btn-secondary ">Save</button>
     </div>
   </div>
-
-  <div class="row">
-    <app-create-chart class="col-12 ml-3"></app-create-chart>
-  </div>
+  
+  <app-toggle-view>
+    <div class="row">
+      <app-create-chart class="col-12 ml-3"></app-create-chart>
+    </div>
+  </app-toggle-view>
   <hr>
 
   <div class="row">
