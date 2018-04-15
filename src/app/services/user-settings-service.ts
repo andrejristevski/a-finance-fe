@@ -13,7 +13,8 @@ export class UserSettingsService {
 
     constructor(private db: AngularFireDatabase,
         private notif: SnotifyService) {
-        const userId = JSON.parse(localStorage.getItem('user')).uid;
+        // const userId = JSON.parse(localStorage.getItem('user')).uid;
+        const userId = 'asdasd';
         this.itemRef = this.db.object(`${this.usersDbPath}/${userId}}`);
         this.exchangesRef = this.db.list(`${this.exchangesDbPath}/${userId}}`);
     }

@@ -1,32 +1,44 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { debug } from 'util';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private firebaseAuth: AngularFireAuth) { }
+  constructor(private http: HttpClient) { }
 
   signup(email: string, password: string): Promise<any> {
-    return this.firebaseAuth
-      .auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(value => {
-        return value;
+    // this.http.post(`${environment['baseUrl']}/signup`, { email, password })
+    //   .map(value => {
+    //     debugger;
+    //   });
+    return this.http.
+      post(`${environment['baseUrl']}/signup`, { username: email, pass: password })
+      .toPromise()
+      .then(val => {
+        return val;
+      }).catch(err => {
+
       });
+
   }
 
   login(email: string, password: string): Promise<any> {
-    return this.firebaseAuth
-      .auth
-      .signInWithEmailAndPassword(email, password)
-      .then(value => {
-        return value;
+    debugger;
+    const url = `${environment['baseUrl']}/login`;
+    return this.http.
+      post(`${environment['baseUrl']}/login`, { username: email, pass: password })
+      .toPromise()
+      .then(val => {
+        debugger;
+        return val;
+      }).catch(err => {
+        debugger;
       });
-
   }
 
   logout() {
-    this.firebaseAuth.auth.signOut();
     localStorage.removeItem('user');
   }
 

@@ -10,10 +10,12 @@ import { AuthService } from './services/auth.service';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { TokenInterceptor } from './interceptors/token-interceptor';
 
 import { AuthGuard } from './feature-modules/login/auth.guard';
 import { NavbarModule } from './feature-modules/navbar/navbar.module';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { DataService } from './services/data.service';
 import { ChartService } from './services/chart.service';
@@ -31,6 +33,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     NavbarModule,
     LoginModule,
     HttpModule,
+    HttpClientModule,
     SnotifyModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -41,6 +44,11 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     UserSettingsService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService,
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: TokenInterceptor, 
+      multi: true 
+  } 
   ],
   bootstrap: [AppComponent]
 })
