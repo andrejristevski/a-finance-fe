@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit,  ElementRef } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { DataService } from '../../../../services/data.service';
 import { UserSettingsService } from '../../../../services/user-settings-service';
@@ -8,7 +8,7 @@ import { UserSettingsService } from '../../../../services/user-settings-service'
   templateUrl: './create-exchange.component.html',
   styleUrls: ['./create-exchange.component.scss']
 })
-export class CreateExchangeComponent implements OnInit {
+export class CreateExchangeComponent implements OnInit, AfterViewInit {
 
   constructor(private chartsDataservice: DataService,
     private userDataService: UserSettingsService) { }
@@ -19,6 +19,9 @@ export class CreateExchangeComponent implements OnInit {
   sum;
   exchangeRate;
   date = new Date();
+
+  @ViewChild('datepick') datepicker: any;
+
 
   inpCurSettings: IMultiSelectSettings = {
     checkedStyle: 'fontawesome',
@@ -45,6 +48,11 @@ export class CreateExchangeComponent implements OnInit {
       getIMultiSelectOptionFromStringArray(this.chartsDataservice.getSuportedOutputCurPerSum());
   }
 
+  ngAfterViewInit() {
+    this.datepicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
+    debugger;
+  }
+
   createExchange() {
     const exchange = {
       sum: this.sum,
@@ -55,4 +63,6 @@ export class CreateExchangeComponent implements OnInit {
     };
     this.userDataService.saveExchangeForUser(exchange);
   }
+
+
 }

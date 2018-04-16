@@ -18,8 +18,6 @@ export class NetworkService {
         endDate: ed,
         inp: inpCur,
         out: outCur
-      }).map((res: Response) => {
-        return res.json();
       });
   }
 
@@ -30,8 +28,6 @@ export class NetworkService {
         endDate: ed,
         inp: inpCur,
         out: outCur
-      }).map((res: Response) => {
-        return res.json();
       });
   }
 
@@ -42,8 +38,6 @@ export class NetworkService {
         endDate: ed,
         inpCur,
         outCur,
-      }).map((res: Response) => {
-        return res.json();
       });
   }
 }
