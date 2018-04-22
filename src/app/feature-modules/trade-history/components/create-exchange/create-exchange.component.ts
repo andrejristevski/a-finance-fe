@@ -50,7 +50,6 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.datepicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
-    debugger;
   }
 
   createExchange() {
@@ -63,6 +62,4 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
     };
     this.userDataService.saveExchangeForUser(exchange);
   }
-
-
 }

@@ -8,17 +8,22 @@ import { UserSettingsService } from '../../../../services/user-settings-service'
 })
 export class ExchangeHistoryComponent implements OnInit {
 
-  exchanges;
+  exchanges = [];
 
   constructor(private userDataService: UserSettingsService) { }
 
   ngOnInit() {
     this.userDataService.getUserExchanges()
-      .subscribe(action => {
-        this.exchanges = action.map((item, i) => {
-          return item.payload.val();
+      .subscribe(res => {
+        debugger;
+        if (res.length) {
+          res.forEach(exchange => {
+            this.exchanges.push(exchange);
+          });
+        } else {
+          this.exchanges.push(res);
         }
-        );
+
       });
   }
 

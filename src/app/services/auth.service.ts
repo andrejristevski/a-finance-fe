@@ -9,10 +9,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signup(email: string, password: string): Promise<any> {
-    // this.http.post(`${environment['baseUrl']}/signup`, { email, password })
-    //   .map(value => {
-    //     debugger;
-    //   });
     return this.http.
       post(`${environment['baseUrl']}/signup`, { username: email, pass: password })
       .toPromise()
@@ -25,16 +21,13 @@ export class AuthService {
   }
 
   login(email: string, password: string): Promise<any> {
-    debugger;
     const url = `${environment['baseUrl']}/login`;
     return this.http.
       post(`${environment['baseUrl']}/login`, { username: email, pass: password })
       .toPromise()
       .then(val => {
-        debugger;
         return val;
       }).catch(err => {
-        debugger;
       });
   }
 
