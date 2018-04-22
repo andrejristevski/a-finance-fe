@@ -18,9 +18,21 @@ export class UserSettingsService {
     }
 
     getUserSettings(): any {
+       return this.http
+            .get(`${environment['baseUrl']}/chartsettings`);
     }
 
-    saveChartsSettingsForUser(settings) {
+    saveChartsSettingsForUser(chartSettings) {
+        debugger;
+        this.http
+            .post(`${environment['baseUrl']}/chartsettings`, chartSettings)
+            .subscribe(
+                res => {
+                    this.notif.success('Charts settings saved', notificationOptions);
+                },
+                err => {
+                    this.notif.error('Error while saving charts', notificationOptions);
+                });
     }
 
     saveExchangeForUser(exchange) {
@@ -28,11 +40,11 @@ export class UserSettingsService {
             .post(`${environment['baseUrl']}/exchanges`, exchange)
             .subscribe(
                 res => {
-                    this.notif.success('Charts settings saved', notificationOptions);
+                    this.notif.success('Exchange  saved', notificationOptions);
                     this.subject.next(exchange);
                 },
                 err => {
-                    this.notif.error('Error while saving charts', notificationOptions);
+                    this.notif.error('Error while saving exchange', notificationOptions);
                 });
     }
 

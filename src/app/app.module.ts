@@ -7,9 +7,6 @@ import { LoginModule } from './feature-modules/login/login.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { TokenInterceptor } from './interceptors/token-interceptor';
 
 import { AuthGuard } from './feature-modules/login/auth.guard';
@@ -35,9 +32,6 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     HttpModule,
     HttpClientModule,
     SnotifyModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
     AppRoutingModule,
   ],
   providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService, 

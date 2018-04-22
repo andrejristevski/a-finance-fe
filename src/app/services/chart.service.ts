@@ -24,11 +24,11 @@ export class ChartService {
   constructor(private networkService: NetworkService,
     private settingsService: UserSettingsService) {
 
-    // this.settingsService.getUserSettings()
-    //   .subscribe(action => {
-    //     const settings = action.payload.val();
-    //     this.generateCharts(settings.chartSettings);
-    //   });
+    this.settingsService.getUserSettings()
+      .subscribe(cs => {
+        debugger;
+        this.generateCharts(cs.chartsSettings);
+      });
   }
 
 
