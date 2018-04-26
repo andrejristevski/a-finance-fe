@@ -26,7 +26,6 @@ export class ChartService {
 
     this.settingsService.getUserSettings()
       .subscribe(cs => {
-        debugger;
         this.generateCharts(cs.chartsSettings);
       });
   }

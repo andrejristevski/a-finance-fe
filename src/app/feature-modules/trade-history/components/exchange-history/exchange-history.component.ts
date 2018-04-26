@@ -15,7 +15,6 @@ export class ExchangeHistoryComponent implements OnInit {
   ngOnInit() {
     this.userDataService.getUserExchanges()
       .subscribe(res => {
-        debugger;
         if (res.length) {
           res.forEach(exchange => {
             this.exchanges.push(exchange);

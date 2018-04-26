@@ -23,7 +23,6 @@ export class UserSettingsService {
     }
 
     saveChartsSettingsForUser(chartSettings) {
-        debugger;
         this.http
             .post(`${environment['baseUrl']}/chartsettings`, chartSettings)
             .subscribe(

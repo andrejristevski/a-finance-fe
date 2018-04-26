@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
         console.error(err);
         this.notif.error('error signin up', notificationOptions);
       });
-    this.userName = this.password = '';
   }
 
   login() {

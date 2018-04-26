@@ -1,7 +1,7 @@
 <div class="row form-group">
   <label for="select-input" class="col-3">Select input</label>
   <div class="col-3">
-    <ss-multiselect-dropdown [disabled]="chartTypeSelected[0]==2" [options]="inputCurrencies" [texts]="inpCurTexts" id="select-input"
+    <ss-multiselect-dropdown [disabled]="chartTypeSelected[0]==1" [options]="inputCurrencies" [texts]="inpCurTexts" id="select-input"
       [settings]="inpCurSettings" [(ngModel)]="inpCurSelected" (ngModelChange)="onChange($event)">
     </ss-multiselect-dropdown>
   </div>
@@ -45,22 +45,9 @@
   </div>
 </div>
 
-<!-- <br>
-<div class="ml-2 mt-3">
-  <ng-datepicker [(ngModel)]="startDate"></ng-datepicker>
-  <div class="mt-1">
-    <ng-datepicker [(ngModel)]="endDate"></ng-datepicker>
-  </div>
-</div> -->
 
 <div class="row form-group">
   <div class="col">
     <button type="button" (click)="createChart()" class="btn btn-success">Create</button>
   </div>
 </div>
-
-<!-- <div class="ml-2">
-  <button type="button" (click)="createChart()" class="btn btn-success">Create</button>
-  <button type="button" (click)="a()" class="btn btn-success">Default call</button>
-  <button type="button" (click)="post()" class="btn btn-success">post</button>
-</div> -->
