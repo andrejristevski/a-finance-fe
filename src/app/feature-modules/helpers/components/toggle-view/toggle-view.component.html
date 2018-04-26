@@ -1,7 +1,6 @@
 <div>
   <div (click)="toogleView()">
     {{label}}
-    <!-- <i class="fa fa-angle-down"></i> -->
     <i [ngClass]=" isShowing ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i>
   </div>
   <div *ngIf="isShowing" class="mt-2">
