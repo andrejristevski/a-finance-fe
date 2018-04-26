@@ -1,9 +1,11 @@
-<div>
-  <div (click)="toogleView()">
-    {{label}}
-    <i [ngClass]=" isShowing ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i>
-  </div>
-  <div *ngIf="isShowing" class="mt-2">
-    <ng-content></ng-content>
+<div class="toggle-view-component border border-primary rounded">
+  <div class="p-2">
+    <div (click)="toogleView()" class="bg-light">
+      {{label}}
+      <i [ngClass]=" isShowing ? 'fa fa-angle-up' : 'fa fa-angle-down'"></i>
+    </div>
+    <div *ngIf="isShowing" class="mt-2">
+      <ng-content></ng-content>
+    </div>
   </div>
 </div>
