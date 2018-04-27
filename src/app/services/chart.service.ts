@@ -9,53 +9,78 @@ import { ChartType } from '../../environments/environment';
 @Injectable()
 export class ChartService {
 
-  charts = [];
+  ratesCharts = [];
+  performanceCharts = [];
 
   handlers = {
     [ChartType.PAIR]: (startDate, endDate, inpCur, outCur): Observable<any> =>
       this.networkService.getDataForCurrencyPair(startDate, endDate, inpCur, outCur),
     [ChartType.CURRENCY_STRENGTH]: (startDate, endDate, inpCur, outCur): Observable<any> =>
       this.networkService.getCurrencyStrength(startDate, endDate, inpCur, outCur),
-    // [ChartType.PERCENTAGE_SUM]: (startDate, endDate, inpCur, outCur): Observable<any> =>
-    //   this.networkService.getPercentageSum(startDate, endDate, inpCur, outCur),
 
   };
 
   constructor(private networkService: NetworkService,
     private settingsService: UserSettingsService) {
 
+
+  }
+
+  generatePerformanceCharts() {
+    // debugger;
+  }
+
+  generateDashboardCharts() {
     this.settingsService.getUserSettings()
       .subscribe(cs => {
         this.generateCharts(cs.chartsSettings);
       });
   }
 
-
   generateCharts(chartsSettings) {
     chartsSettings.forEach(cs => {
       const startDate = new Date(cs.startDate);
       const endDate = new Date(cs.endDate);
-      if (this.charts.filter(c => c.id === cs.id).length === 0) {
+      if (this.ratesCharts.filter(c => c.id === cs.id).length === 0) {
         this.createChart(cs.inp, cs.out, startDate, endDate, cs.type, cs.id);
       }
     });
   }
 
   getCharts() {
-    return this.charts;
+    return this.ratesCharts;
+  }
+
+  getPerformanceCharts() {
+    return this.performanceCharts;
   }
 
   createDefault() {
     this.createChart('EUR', ['CAD', 'AUD', 'USD'], new Date(2016, 1, 20), new Date());
   }
 
-  deleteChart(id) {
-    for (let i = 0; i < this.charts.length; i++) {
-      if (this.charts[i].id === id) {
-        this.charts.splice(i, 1);
+  deleteRatesChart(id) {
+    for (let i = 0; i < this.ratesCharts.length; i++) {
+      if (this.ratesCharts[i].id === id) {
+        this.ratesCharts.splice(i, 1);
         return;
       }
     }
+  }
+
+  deletePerformanceChart(id) {
+
+  }
+
+  deleteChart(id, type) {
+
+    if (type === 'chtype-rates-chart') {
+      this.deleteRatesChart(id);
+    } else {
+      this.deletePerformanceChart(id);
+    }
+
+
   }
 
   createChart(inp, out, startDate, endDate, type = 'PairData', id?) {
@@ -74,7 +99,7 @@ export class ChartService {
 
     console.log(`Creating chart with ${type}`);
     obs.subscribe(data => {
-      this.charts.push({ id: chartSettings.id, data, chartSettings });
+      this.ratesCharts.push({ id: chartSettings.id, data, chartSettings });
     });
   }
 
@@ -100,11 +125,9 @@ export class ChartService {
 
   saveCharts() {
 
-    const chartsSettings = this.charts
+    const chartsSettings = this.ratesCharts
       .map(chart => chart.chartSettings);
-    // this.charts = [];
     this.settingsService.saveChartsSettingsForUser(chartsSettings);
-
   }
 
 }

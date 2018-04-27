@@ -10,10 +10,9 @@ import 'rxjs/add/operator/catch';
 export class TokenInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-
         let authReq;
         const userStorage = localStorage.getItem('user');
-        if (userStorage !== 'undefined') {
+        if (userStorage && userStorage !== 'undefined') {
             const token = JSON.parse(localStorage.getItem('user')).token;
 
             authReq = req.clone({

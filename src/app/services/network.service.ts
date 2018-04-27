@@ -13,12 +13,12 @@ export class NetworkService {
   getDataForCurrencyPair(sd, ed, inpCur, outCur) {
     return this.http.
       post(`${environment['baseUrl']}/${environment['curPairPath']}`,
-      {
-        startDate: sd,
-        endDate: ed,
-        inp: inpCur,
-        out: outCur
-      });
+        {
+          startDate: sd,
+          endDate: ed,
+          inp: inpCur,
+          out: outCur
+        });
   }
 
   getCurrencyStrength(sd, ed, inpCur, outCur) {
@@ -39,5 +39,10 @@ export class NetworkService {
         inpCur,
         outCur,
       });
+  }
+
+  getUserPerformance() {
+    return this.http
+      .get(`${environment['baseUrl']}/performance-data`);
   }
 }

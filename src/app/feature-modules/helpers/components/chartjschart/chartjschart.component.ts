@@ -21,9 +21,13 @@ export class ChartComponent implements OnInit {
   @Input()
   id: any;
 
+  @Input()
+  chartType: any;
+
   delete(id) {
+    debugger;
     console.log(`deleting  ${id}`);
-    this.chartService.deleteChart(id);
+    this.chartService.deleteChart(id, this.chartType);
   }
 
   ngOnInit() { }

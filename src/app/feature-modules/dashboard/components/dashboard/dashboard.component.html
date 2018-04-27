@@ -14,7 +14,9 @@
   <hr>
 
   <div class="row">
-    <app-chartjschart *ngFor="let chart of charts" [(data)]="chart.data" [(id)]="chart.id" class="col-12">
+    <app-chartjschart *ngFor="let chart of charts" [(data)]="chart.data" 
+    [(id)]="chart.id" class="col-12"
+    [chartType]="'chtype-rates-chart'">
     </app-chartjschart>
   </div>
 </div>

@@ -1,3 +1,6 @@
 <p>
   account-performance works!
 </p>
+<app-chartjschart *ngIf="performanceChart" 
+[(data)]="performanceChart.data" [(id)]="performanceChart.id" [chartType]="'chtype-performance-chart'">
+</app-chartjschart>

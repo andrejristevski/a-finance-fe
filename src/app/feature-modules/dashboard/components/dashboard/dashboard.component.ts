@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private chartService: ChartService, private userSettingsService: UserSettingsService) {
 
-    // this.userSettingsService.getUserSettings();
   }
 
   saveCharts() {
@@ -22,6 +21,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.chartService.generateDashboardCharts();
   }
 
 }
