@@ -15,9 +15,10 @@ export class AccountPerformanceComponent implements OnInit {
   performanceCharts = this.chartService.getPerformanceCharts();
 
   ngOnInit() {
+
     this.networkService.getUserPerformance()
       .subscribe(data => {
-
+        debugger;
         // this.performanceChart = { id: 'perfId', data };
 
         this.chartService.generatePerformanceCharts();
