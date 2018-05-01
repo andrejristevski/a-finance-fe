@@ -10,7 +10,6 @@ import { ChartType } from '../../environments/environment';
 export class ChartService {
 
   ratesCharts = [];
-  performanceCharts = [];
 
   handlers = {
     [ChartType.PAIR]: (startDate, endDate, inpCur, outCur): Observable<any> =>
@@ -24,10 +23,6 @@ export class ChartService {
     private settingsService: UserSettingsService) {
 
 
-  }
-
-  generatePerformanceCharts() {
-    // debugger;
   }
 
   generateDashboardCharts() {
@@ -49,10 +44,6 @@ export class ChartService {
 
   getCharts() {
     return this.ratesCharts;
-  }
-
-  getPerformanceCharts() {
-    return this.performanceCharts;
   }
 
   createDefault() {

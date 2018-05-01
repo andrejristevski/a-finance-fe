@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit,  ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { DataService } from '../../../../services/data.service';
 import { UserSettingsService } from '../../../../services/user-settings-service';
@@ -58,7 +58,8 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
       exchangeRate: this.exchangeRate,
       inputCcy: this.inputCurrencies[this.inpCurSelected[0]].name,
       outCcy: this.inputCurrencies[this.outCurSelected[0]].name,
-      date: this.date.toISOString().split('T')[0]
+      date: this.date.toISOString().split('T')[0],
+      balance: this.sum * this.exchangeRate
     };
     this.userDataService.saveExchangeForUser(exchange);
   }

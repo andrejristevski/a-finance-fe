@@ -12,7 +12,7 @@ export class AccountPerformanceComponent implements OnInit {
   constructor(private networkService: NetworkService,
     private chartService: ChartService) { }
 
-  performanceCharts = this.chartService.getPerformanceCharts();
+  performanceCharts;
 
   ngOnInit() {
 
@@ -21,7 +21,7 @@ export class AccountPerformanceComponent implements OnInit {
         debugger;
         // this.performanceChart = { id: 'perfId', data };
 
-        this.chartService.generatePerformanceCharts();
+        // this.chartService.generatePerformanceCharts();
         // generate performance charts
       });
   }

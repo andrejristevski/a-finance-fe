@@ -20,9 +20,10 @@ export class ExchangeHistoryComponent implements OnInit {
             this.exchanges.push(exchange);
           });
         } else {
-          this.exchanges.push(res);
+          if (res.length !== 0) {
+            this.exchanges.push(res);
+          }
         }
-
       });
   }
 
