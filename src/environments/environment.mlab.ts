@@ -18,7 +18,7 @@ export const environment = {
     // 'PERCENTAGE_SUM': 'Percentage sum',
   };
   
-  export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY'];
+  export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY', 'MKD'];
   
   export const notificationOptions = {
     timeout: 5000,

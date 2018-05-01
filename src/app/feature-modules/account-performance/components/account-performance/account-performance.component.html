@@ -1,6 +1,54 @@
-<p>
-  account-performance works!
-</p>
-<app-chartjschart *ngIf="performanceChart" 
-[(data)]="performanceChart.data" [(id)]="performanceChart.id" [chartType]="'chtype-performance-chart'">
-</app-chartjschart>
+<div class="performance-overview-component m-4">
+
+  <div class="row w-100 account-balance row-item ">
+    <div class="col-2">
+      <h4>Account balance</h4>
+    </div>
+    <div class="col-3 d-flex align-items-center">
+      {{performanceData.latestBalances.currentBalance }}
+    </div>
+    <div class="col-3 d-flex align-items-center">
+      {{performanceData.latestBalances.currentCcy}}
+    </div>
+  </div>
+
+  <div class="row w-100 all-ccys-traded row-item">
+    <div class="col-2">
+      All ccys traded:
+    </div>
+    <div class="col-10">
+      {{performanceData.allTradedCcys}}
+    </div>
+  </div>
+
+  <div class="row w-100 possible-returns row-item">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Ccy</th>
+          <th>Posible balace</th>
+          <th>Latest Exchange diff</th>
+          <th>Neutral rate</th>
+          <th>Current rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ccy of performanceData.allTradedCcys">
+          <td>{{ccy}}</td>
+          <td>{{performanceData.latestBalances.possibleBalance[ccy] }}
+          </td>
+          <td [ngClass]="{
+            'positive-balance': performanceData.latestRateDiff[ccy]>= 0,
+            'negative-balance': performanceData.latestRateDiff[ccy]< 0
+          }">
+            {{performanceData.latestRateDiff[ccy] }}</td>
+          <td [ngClass]="{
+            'notApllicable': performanceData.ccysOverallTrading[ccy].neutralRate ===1
+          }">{{performanceData.ccysOverallTrading[ccy].neutralRate}}</td>
+          <td [ngClass]="{
+            'notApllicable': !performanceData.latestRates.rates[ccy]
+          }">{{performanceData.latestRates.rates[ccy]}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
