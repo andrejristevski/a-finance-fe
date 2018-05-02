@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { debug } from 'util';
+import { SnotifyService } from 'ng-snotify';
+import { notificationOptions } from '../../environments/environment';
+
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private notif: SnotifyService) { }
 
   signup(email: string, password: string): Promise<any> {
     return this.http.
@@ -15,7 +19,7 @@ export class AuthService {
       .then(val => {
         return val;
       }).catch(err => {
-
+        this.notif.error('error signin up', notificationOptions);
       });
 
   }

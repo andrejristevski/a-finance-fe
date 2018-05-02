@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:5000',
-  // baseUrl: 'https://a-rates.herokuapp.com',
+  baseUrl: 'https://enigmatic-fjord-76871.herokuapp.com',
   curPairPath: 'rates',
   strength: 'strength',
   percentagesum: 'percentagesum',
@@ -14,7 +13,7 @@ export const ChartType = {
   'PERCENTAGE_SUM': 'Percentage sum',
 };
 
-export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY', 'MKD'];
+export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY'];
 
 export const notificationOptions = {
   timeout: 5000,
