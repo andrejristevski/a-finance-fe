@@ -14,7 +14,6 @@ import { NavbarModule } from './feature-modules/navbar/navbar.module';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { DataService } from './services/data.service';
 import { ChartService } from './services/chart.service';
 import { NetworkService } from './services/network.service';
 import { UserSettingsService } from './services/user-settings-service';
@@ -34,7 +33,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     SnotifyModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard, DataService, ChartService, NetworkService, 
+  providers: [AuthService, AuthGuard, ChartService, NetworkService, 
     UserSettingsService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService,

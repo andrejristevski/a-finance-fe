@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
-import { DataService } from '../../../../services/data.service';
 import { UserSettingsService } from '../../../../services/user-settings-service';
+import { PercentageSumCur } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-create-exchange',
@@ -10,7 +10,7 @@ import { UserSettingsService } from '../../../../services/user-settings-service'
 })
 export class CreateExchangeComponent implements OnInit, AfterViewInit {
 
-  constructor(private chartsDataservice: DataService,
+  constructor(
     private userDataService: UserSettingsService) { }
 
   inpCurSelected: number[];
@@ -21,7 +21,6 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   date = new Date();
 
   @ViewChild('datepick') datepicker: any;
-
 
   inpCurSettings: IMultiSelectSettings = {
     checkedStyle: 'fontawesome',
@@ -44,8 +43,20 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit() {
-    this.inputCurrencies = this.chartsDataservice.
-      getIMultiSelectOptionFromStringArray(this.chartsDataservice.getSuportedOutputCurPerSum());
+    this.inputCurrencies = this.
+      getIMultiSelectOptionFromStringArray(PercentageSumCur);
+  }
+
+  getIMultiSelectOptionFromStringArray(values) {
+    const res = [];
+    values.forEach((element, i) => {
+      res.push(
+        {
+          id: i,
+          name: element
+        });
+    });
+    return res;
   }
 
   ngAfterViewInit() {

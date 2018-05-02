@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ChartService } from '../../../../services/chart.service';
 import { ChartUtils } from './chartUtils';
 
@@ -11,7 +11,7 @@ import { Chart } from 'chart.js';
   styleUrls: ['./chartjschart.component.scss'],
   providers: [ChartUtils]
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, AfterViewInit {
 
   constructor(private chartService: ChartService, private chartUtils: ChartUtils) { }
 

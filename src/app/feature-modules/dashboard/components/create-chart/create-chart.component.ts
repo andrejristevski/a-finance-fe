@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../../services/data.service';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { ChartService } from '../../../../services/chart.service';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { SnotifyService } from 'ng-snotify';
-import { notificationOptions } from '../../../../../environments/environment';
+import { ChartType, PercentageSumCur, notificationOptions } from '../../../../../environments/environment';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-create-chart',
   templateUrl: './create-chart.component.html',
   styleUrls: ['./create-chart.component.scss']
 })
-export class CreateChartComponent implements OnInit {
+export class CreateChartComponent implements OnInit, AfterViewInit {
 
-  constructor(private service: DataService, private chartService: ChartService,
+  constructor(private chartService: ChartService,
     private notif: SnotifyService) {
   }
+
+  @ViewChild('multiSelecInput') multiSelecInput;
+  @ViewChild('multiSelecOutput') multiSelecOutput;
+  @ViewChild('multiSelecChartType') multiSelectChartType;
 
   today = new Date();
   startDate: any = (new Date()).setDate(this.today.getDate() - 1);
@@ -59,27 +63,29 @@ export class CreateChartComponent implements OnInit {
 
   ngOnInit() {
     this.inputCurrencies =
-      this.getIMultiSelectOptionFromStringArray(this.service.getCurrencies());
+      this.getIMultiSelectOptionFromStringArray(PercentageSumCur);
     this.outputCurrencies =
-      this.getIMultiSelectOptionFromStringArray(this.service.getOutCurrencies());
+      this.getIMultiSelectOptionFromStringArray(PercentageSumCur);
     this.chartTypes =
-      this.getIMultiSelectOptionFromStringArray(this.service.getChartTypes());
+      this.getIMultiSelectOptionFromStringArray(Object.keys(ChartType)
+        .map(key => ChartType[key]));
   }
+
+
+  ngAfterViewInit() {
+
+  }
+
   chartChanged() {
     this.inpCurSelected = [0];
     this.outputCurSelected = [2];
   }
 
+  chartOpened(element) {
+  }
+
+
   onChange() {
-    if (this.chartTypeSelected[0] === 1) {
-      this.outputCurrencies = this.getIMultiSelectOptionFromStringArray(
-        this.service.getSuportedOutputCurPerSum());
-      // this.outputCurSelected = [0]
-    } else {
-      this.outputCurrencies =
-        this.getIMultiSelectOptionFromStringArray(this.service.getOutCurrencies());
-      // this.outputCurSelected = [0]
-    }
   }
 
   setDate(monts) {

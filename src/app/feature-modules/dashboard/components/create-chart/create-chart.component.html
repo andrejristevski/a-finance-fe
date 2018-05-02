@@ -1,8 +1,9 @@
 <div class="row form-group">
   <label for="select-input" class="col-3">Select input</label>
   <div class="col-3">
-    <ss-multiselect-dropdown [disabled]="chartTypeSelected[0]==1" [options]="inputCurrencies" [texts]="inpCurTexts" id="select-input"
-      [settings]="inpCurSettings" [(ngModel)]="inpCurSelected" (ngModelChange)="onChange($event)">
+    <ss-multiselect-dropdown #multiSelecInput (dropdownOpened)="chartOpened(multiSelecInput)" [disabled]="chartTypeSelected[0]==1"
+      [options]="inputCurrencies" [texts]="inpCurTexts" id="select-input" [settings]="inpCurSettings" [(ngModel)]="inpCurSelected"
+      (ngModelChange)="onChange()">
     </ss-multiselect-dropdown>
   </div>
 </div>
@@ -10,17 +11,17 @@
 <div class="row form-group">
   <label for="select-output" class="col-3">Select output</label>
   <div class="col-3">
-    <ss-multiselect-dropdown [options]="outputCurrencies" [texts]="inpCurTexts" [settings]="outCurSettings" [(ngModel)]="outputCurSelected"
-      id="select-output" (ngModelChange)="onChange($event)">
+    <ss-multiselect-dropdown #multiSelecOutput (dropdownOpened)="chartOpened(multiSelecOutput)" [options]="outputCurrencies"
+      [texts]="inpCurTexts" [settings]="outCurSettings" [(ngModel)]="outputCurSelected" id="select-output" (ngModelChange)="onChange()">
     </ss-multiselect-dropdown>
   </div>
 </div>
 
 <div class="row form-group">
   <label for="select-chart-type" class="col-3">Select chart type</label>
-  <div class="col-3">
-    <ss-multiselect-dropdown class="" [options]="chartTypes" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected"
-      id="select-chart-type" (ngModelChange)="chartChanged($event)">
+  <div class="col-3" >
+    <ss-multiselect-dropdown #multiSelecChartType (dropdownOpened)="chartOpened(multiSelecChartType)" [options]="chartTypes"
+      [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected" id="select-chart-type" (ngModelChange)="chartChanged()">
     </ss-multiselect-dropdown>
   </div>
 </div>
@@ -41,7 +42,7 @@
 
 <div class="row form-group">
   <div class="col-12">
-    <timeframe-buttons  (selected)="setDate($event)"></timeframe-buttons>
+    <timeframe-buttons (selected)="setDate($event)"></timeframe-buttons>
   </div>
 </div>
 

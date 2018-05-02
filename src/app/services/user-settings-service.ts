@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { notificationOptions } from '../../environments/environment';
 import { SnotifyService } from 'ng-snotify';
 import { HttpClient } from '@angular/common/http';

@@ -9,8 +9,8 @@ export const environment = {
 };
 export const ChartType = {
   'PAIR': 'PairData',
-  'CURRENCY_STRENGTH': 'Percentage strength',
-  'PERCENTAGE_SUM': 'Percentage sum',
+  'CURRENCY_STRENGTH': 'Currency strength',
+  // 'PERCENTAGE_SUM': 'Percentage sum',
 };
 
 export const PercentageSumCur = ['EUR', 'CAD', 'USD', 'JPY', 'AUD', 'CNY'];
