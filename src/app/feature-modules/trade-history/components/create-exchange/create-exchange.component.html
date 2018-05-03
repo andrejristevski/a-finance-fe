@@ -1,52 +1,76 @@
-<div class="">
-
+<div>
   <div class="row form-group">
     <label for="input-cur" class="col-3">From</label>
     <div class="col-3">
-      <!-- <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="inpCurSelected"
-        id="input-cur">
-      </ss-multiselect-dropdown> -->
-      <ng-multiselect-dropdown [placeholder]="'Select input'" [data]="currencies" [(ngModel)]="inpCurSelected" [settings]="dropdownSettingsSingle">
-        </ng-multiselect-dropdown>
+      <ng-multiselect-dropdown #inputCurFormControl="ngModel" [placeholder]="'Select input'" class="form-control p-0" [data]="currencies"
+        [(ngModel)]="inpCurSelected" required [settings]="dropdownSettingsSingle" (onSelect)="inputCurAdded()">
+      </ng-multiselect-dropdown>
     </div>
+  </div>
+  <div *ngIf="inputCurFormControl.invalid && formState.inpCurSelected.touched" class="alert alert-danger">
+    You must select input ccy
   </div>
 
   <div class="row  form-group">
     <label for="out-cur" class="col-3 ">To</label>
     <div class="col-3 ">
-      <!-- <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="outCurSelected"
-        id="out-cur">
-      </ss-multiselect-dropdown> -->
-      <ng-multiselect-dropdown [placeholder]="'Select input'" [data]="currencies" [(ngModel)]="outputCurSelected" [settings]="dropdownSettingsSingle">
-        </ng-multiselect-dropdown>
+      <ng-multiselect-dropdown required #outputCurFormControl="ngModel" (onSelect)="outputCurAdded()" [placeholder]="'Select input'"
+        class="form-control p-0" [data]="currencies" [(ngModel)]="outputCurSelected" [settings]="dropdownSettingsSingle">
+      </ng-multiselect-dropdown>
     </div>
   </div>
+  <div *ngIf="outputCurFormControl.invalid && formState.outputCurSelected.touched" class="alert alert-danger">
+    You must select output ccy
+  </div>
+
 
   <div class="form-group row">
     <label for="sum-input" class="col-3  col-form-label">Sum</label>
     <div class="col-3">
-      <input class="form-control" type="number" [(ngModel)]="sum" id="sum-input">
+      <input class="form-control" (input)="onSumChanged()" required #sumFormControl="ngModel" type="number" min="0" [(ngModel)]="sum"
+        id="sum-input">
     </div>
   </div>
+  <div *ngIf="sumFormControl.invalid && (sumFormControl.dirty || sumFormControl.touched)" class="alert alert-danger">
+    You must enter a sum
+  </div>
+  <div *ngIf="formState.sum.errors.length > 0" class="alert alert-danger">
+    Sum must be positive
+  </div>
+
 
   <div class="form-group row">
     <label for="rate-input" class="col-3  col-form-label">Exchange rate</label>
     <div class="col-3">
-      <input class="form-control" type="number" [(ngModel)]="exchangeRate" id="rate-input">
+      <input class="form-control" (input)="onRateChanged()" required #excRateForm="ngModel" type="number" min="0" [(ngModel)]="exchangeRate"
+        id="rate-input">
     </div>
+  </div>
+  <div *ngIf="excRateForm.invalid && (excRateForm.dirty || excRateForm.touched)" class="alert alert-danger">
+    You must enter valid rate
+  </div>
+  <div *ngIf="formState.exchangeRate.errors.length > 0" class="alert alert-danger">
+    Rate must be positive
   </div>
 
   <div class="form-group row">
     <label for="rate-input" class="col-3  col-form-label">Date</label>
     <div class="col-3">
-      <ng-datepicker #datepick [(ngModel)]="date" class="dp"></ng-datepicker>
+      <ng-datepicker #datepick="ngModel" class="form-control p-0"  [(ngModel)]="date" (ngModelChange)="onDateChanged()" class="dp"></ng-datepicker>
     </div>
+  </div>
+  <div *ngIf="formState.date.errors.length > 0" class="alert alert-danger">
+    Date can't be from the feature
   </div>
 
   <div class="row">
     <div class="col-6">
-      <button (click)="createExchange()" class="btn btn-success float-right">Create</button>
+      <button (click)="createExchange()" [disabled]="ifFormInvalid()" class="btn btn-success float-right">Create</button>
     </div>
   </div>
 
+  <div *ngIf="formState.other.errors.length > 0" class="alert alert-danger">
+    Input and out ccy are the same
+  </div>
+  
 </div>
