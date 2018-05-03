@@ -78,6 +78,9 @@ export class CreateChartComponent implements OnInit {
     allowSearchFilter: false,
   };
 
+  @ViewChild('startDatePickerEl') startDatePicker: any;
+  @ViewChild('endDatePickerEl') endDatePicker: any;
+
   onItemSelect(item: any) {
     console.log(item);
   }
@@ -99,8 +102,12 @@ export class CreateChartComponent implements OnInit {
     this.chartTypes =
       this.getIMultiSelectOptionFromStringArray(Object.keys(ChartType)
         .map(key => ChartType[key]));
-
   }
+
+    ngAfterViewInit() {
+      this.startDatePicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
+      this.endDatePicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
+    }
 
   setDate(monts) {
     this.startDate = this.addMonths(new Date(), -1 * monts);
@@ -181,22 +188,27 @@ export class CreateChartComponent implements OnInit {
   validateChartPair() {
 
     this.resetErrors();
-
-    this.validateOneInputCcyError();
-    this.validateChartTypeError();
-    this.validateSameCcyError();
-    this.validateDateOverlapping();
-    this.validateFeautureDate();
+    if (
+      this.validateOneInputCcyError()
+      || this.validateChartTypeError()
+      || this.validateSameCcyError()
+      || this.validateDateOverlapping()
+      || this.validateFeautureDate()) {
+      return true;
+    }
+    return false;
   }
 
   validateStrength() {
     this.resetErrors();
 
-    this.validateTwoOutputCcyError();
-    this.validateChartTypeError();
-    this.validateDateOverlapping();
-    this.validateFeautureDate();
-
+    if (this.validateTwoOutputCcyError()
+      || this.validateChartTypeError()
+      || this.validateDateOverlapping()
+      || this.validateFeautureDate()) {
+      return true;
+    }
+    return false;
   }
 
   // ako ima error vraka true
@@ -235,19 +247,22 @@ export class CreateChartComponent implements OnInit {
   }
 
   validateDateOverlapping() {
-    if (this.isSecondDateEarlierThanFirst(this.startDate, this.endDate)) {
-      this.formState.startDate.errors.push('Invalid date');
-      return true;
+    if (this.formState.startDate.touched && this.formState.endDate.touched) {
+      if (this.isSecondDateEarlierThanFirst(this.startDate, this.endDate)) {
+        this.formState.startDate.errors.push('Invalid date');
+        return true;
+      }
     }
     return false;
   }
 
   validateFeautureDate() {
-    if (this.isSecondDateEarlierThanFirst(this.startDate, new Date())) {
+
+    if (this.formState.startDate.touched && this.isSecondDateEarlierThanFirst(this.startDate, new Date())) {
       this.formState.startDate.errors.push('Invalid date');
       return true;
     }
-    if (this.isSecondDateEarlierThanFirst(this.endDate, new Date())) {
+    if (this.formState.endDate.touched && this.isSecondDateEarlierThanFirst(this.endDate, new Date())) {
       this.formState.endDate.errors.push('Invalid date');
       return true;
     }
@@ -282,5 +297,6 @@ export class CreateChartComponent implements OnInit {
     } else if (this.chartTypeSelected[0]) {
       return this.validateStrength();
     }
+    return true;
   }
 }

@@ -26,7 +26,6 @@ export class AccountPerformanceComponent implements OnInit {
       .subscribe(data => {
 
         this.performanceData = data;
-        debugger;
       });
   }
 

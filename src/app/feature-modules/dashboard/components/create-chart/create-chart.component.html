@@ -38,7 +38,7 @@
 <div class="row form-group">
   <label for="start-date" class="col-3">Start date</label>
   <div class="col-3" id="start-date">
-    <ng-datepicker #startDateForm="ngModel" [(ngModel)]="startDate" (ngModelChange)="startDateChanged()"></ng-datepicker>
+    <ng-datepicker #startDateForm="ngModel" #startDatePickerEl class="form-control p-0" [(ngModel)]="startDate" (ngModelChange)="startDateChanged()"></ng-datepicker>
   </div>
 </div>
 
@@ -49,7 +49,7 @@
 <div class="row form-group">
   <label for="end-date" class="col-3">End date</label>
   <div class="col-3" id="end-date">
-    <ng-datepicker #endDateForm="ngModel" class="form-control p-0" [(ngModel)]="endDate" (ngModelChange)="endDateChanged()"></ng-datepicker>
+    <ng-datepicker #endDateForm="ngModel" #endDatePickerEl class="form-control p-0" [(ngModel)]="endDate" (ngModelChange)="endDateChanged()"></ng-datepicker>
   </div>
 </div>
 
