@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ChartService } from '../../../../services/chart.service';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { SnotifyService } from 'ng-snotify';
@@ -10,7 +10,7 @@ import { debug } from 'util';
   templateUrl: './create-chart.component.html',
   styleUrls: ['./create-chart.component.scss']
 })
-export class CreateChartComponent implements OnInit {
+export class CreateChartComponent implements OnInit, AfterViewInit {
 
   constructor(private chartService: ChartService,
     private notif: SnotifyService) {
@@ -104,10 +104,10 @@ export class CreateChartComponent implements OnInit {
         .map(key => ChartType[key]));
   }
 
-    ngAfterViewInit() {
-      this.startDatePicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
-      this.endDatePicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
-    }
+  ngAfterViewInit() {
+    this.startDatePicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
+    this.endDatePicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
+  }
 
   setDate(monts) {
     this.startDate = this.addMonths(new Date(), -1 * monts);
