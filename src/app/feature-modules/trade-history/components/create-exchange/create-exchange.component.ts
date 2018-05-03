@@ -46,7 +46,7 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
     }
   };
 
-  @ViewChild('datepick') datepicker: any;
+  @ViewChild('elementDatePicker') datepicker: any;
 
   dropdownSettingsSingle = {
     singleSelection: true,
@@ -85,6 +85,7 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    debugger;
     this.datepicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
   }
 
@@ -122,7 +123,6 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
       this.formState.date.errors.push(`Date can't be from the feature`);
       return true;
     }
-
     return false;
   }
 
@@ -143,7 +143,7 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
     }
   }
 
-  isSecondDateInFeauture(d1, d2) {
+  isSecondDateLater(d1, d2) {
     const yearModel = d1.getFullYear();
     const monthModel = d1.getMonth();
     const dayModel = d1.getDate();
@@ -166,7 +166,7 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
 
   onDateChanged() {
 
-    if (this.isSecondDateInFeauture(this.date, new Date())) {
+    if (this.isSecondDateLater(this.date, new Date())) {
       this.formState.date.errors.push(`Date can't be from the feature`);
     } else {
       this.formState.date.errors = [];

@@ -27,6 +27,36 @@ export class CreateChartComponent implements OnInit {
   outputCurSelected = [];
   chartTypeSelected = [];
 
+  formState = {
+    inpCurSelected: {
+      touched: false,
+      errors: []
+    },
+    outputCurSelected: {
+      touched: false,
+      errors: []
+    },
+    chartType: {
+      touched: false,
+      errors: []
+    },
+    exchangeRate: {
+      touched: false,
+      errors: []
+    },
+    startDate: {
+      touched: false,
+      errors: []
+    },
+    endDate: {
+      touched: false,
+      errors: []
+    },
+    other: {
+      touched: false,
+      errors: []
+    }
+  };
 
   dropdownSettingsMultiple = {
     singleSelection: false,
@@ -69,6 +99,7 @@ export class CreateChartComponent implements OnInit {
     this.chartTypes =
       this.getIMultiSelectOptionFromStringArray(Object.keys(ChartType)
         .map(key => ChartType[key]));
+
   }
 
   setDate(monts) {
@@ -115,5 +146,143 @@ export class CreateChartComponent implements OnInit {
         });
     });
     return res;
+  }
+
+  inputCurAdded() {
+    this.formState.inpCurSelected.touched = true;
+  }
+
+  outputCurAdded() {
+    this.formState.outputCurSelected.touched = true;
+  }
+
+  onChartSelected() {
+    this.formState.chartType.touched = true;
+  }
+
+  startDateChanged() {
+    this.formState.startDate.touched = true;
+  }
+
+  endDateChanged() {
+    this.formState.endDate.touched = true;
+  }
+
+  resetErrors() {
+    this.formState.inpCurSelected.errors = [];
+    this.formState.outputCurSelected.errors = [];
+    this.formState.chartType.errors = [];
+    this.formState.other.errors = [];
+    this.formState.startDate.errors = [];
+    this.formState.endDate.errors = [];
+
+  }
+
+  validateChartPair() {
+
+    this.resetErrors();
+
+    this.validateOneInputCcyError();
+    this.validateChartTypeError();
+    this.validateSameCcyError();
+    this.validateDateOverlapping();
+    this.validateFeautureDate();
+  }
+
+  validateStrength() {
+    this.resetErrors();
+
+    this.validateTwoOutputCcyError();
+    this.validateChartTypeError();
+    this.validateDateOverlapping();
+    this.validateFeautureDate();
+
+  }
+
+  // ako ima error vraka true
+  validateOneInputCcyError() {
+    if (this.inpCurSelected.length === 0) {
+      this.formState.inpCurSelected.errors.push('Input ccy is not selected');
+      return true;
+    }
+    return false;
+  }
+
+  validateTwoOutputCcyError() {
+    if (this.outputCurSelected.length < 2) {
+      this.formState.outputCurSelected.errors.push('At least two ccy must be selected');
+      return true;
+    }
+    return false;
+  }
+
+  validateChartTypeError() {
+    if (this.chartTypeSelected[0]) {
+      return false;
+    }
+    this.formState.chartType.errors.push('Chart type must be selected');
+    return true;
+  }
+
+  validateSameCcyError() {
+    if (this.inpCurSelected[0]) {
+      if (this.outputCurSelected.some(ccy => ccy.item_text === this.inpCurSelected[0].item_text)) {
+        this.formState.other.errors.push('Input and output ccy the same for pair data');
+        return true;
+      }
+    }
+    return false;
+  }
+
+  validateDateOverlapping() {
+    debugger;
+    if (this.isSecondDateEarlierThanFirst(this.startDate, this.endDate)) {
+      this.formState.startDate.errors.push('Invalid date');
+      return true;
+    }
+    return false;
+  }
+
+  validateFeautureDate() {
+    debugger;
+    if (this.isSecondDateEarlierThanFirst(this.startDate, new Date())) {
+      this.formState.startDate.errors.push('Invalid date');
+      return true;
+    }
+    if (this.isSecondDateEarlierThanFirst(this.endDate, new Date())) {
+      this.formState.endDate.errors.push('Invalid date');
+      return true;
+    }
+    return false;
+  }
+
+  isSecondDateEarlierThanFirst(d1, d2) {
+    const yearModel = d1.getFullYear();
+    const monthModel = d1.getMonth();
+    const dayModel = d1.getDate();
+
+    const today = d2;
+    const tYear = today.getFullYear();
+    const tMonth = today.getMonth();
+    const tDay = today.getDate();
+
+    if (yearModel > tYear) {
+      return true;
+    } else if (monthModel > tMonth && yearModel === tYear) {
+      return true;
+    } else if (monthModel === tMonth && yearModel === tYear && dayModel > tDay) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  ifFormInvalid() {
+
+    if (this.chartTypeSelected[0] && this.chartTypeSelected[0].item_text === ChartType['PAIR']) {
+      return this.validateChartPair();
+    } else if (this.chartTypeSelected[0]) {
+      return this.validateStrength();
+    }
   }
 }

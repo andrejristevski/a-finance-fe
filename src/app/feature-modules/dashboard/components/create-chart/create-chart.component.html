@@ -1,62 +1,74 @@
-
-  <div class="row form-group">
-    <label for="select-input" class="col-3">Select input</label>
-    <div class="col-3">
-      <!-- <ss-multiselect-dropdown #multiSelecInput (dropdownOpened)="chartOpened(multiSelecInput)" [disabled]="chartTypeSelected[0]==1"
-        [options]="inputCurrencies" [texts]="inpCurTexts" id="select-input" [settings]="inpCurSettings" [(ngModel)]="inpCurSelected"
-        (ngModelChange)="onChange()">
-      </ss-multiselect-dropdown> -->
-      <ng-multiselect-dropdown [placeholder]="'Select input'" [data]="currencies" [(ngModel)]="inpCurSelected" [settings]="dropdownSettingsSingle">
-      </ng-multiselect-dropdown>
-    </div>
+<div class="row form-group">
+  <label for="select-input" class="col-3">Select input</label>
+  <div class="col-3">
+    <ng-multiselect-dropdown class="form-control p-0" #inputCurFormControl="ngModel" [placeholder]="'Select input'" [data]="currencies"
+      [(ngModel)]="inpCurSelected" (onSelect)="inputCurAdded()" [settings]="dropdownSettingsSingle">
+    </ng-multiselect-dropdown>
   </div>
+</div>
+<div *ngIf="formState.inpCurSelected.touched && formState.inpCurSelected.errors.length > 0" class="alert alert-danger">
+  You must select input ccy
+</div>
 
-  <div class="row form-group">
-    <label for="select-output" class="col-3">Select output</label>
-    <div class="col-3">
-      <!-- <ss-multiselect-dropdown #multiSelecOutput (dropdownOpened)="chartOpened(multiSelecOutput)" [options]="outputCurrencies"
-        [texts]="inpCurTexts" [settings]="outCurSettings" [(ngModel)]="outputCurSelected" id="select-output" (ngModelChange)="onChange()">
-      </ss-multiselect-dropdown> -->
-      <ng-multiselect-dropdown [placeholder]="'Select output'" [data]="currencies" [(ngModel)]="outputCurSelected" [settings]="dropdownSettingsMultiple"
-        (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-      </ng-multiselect-dropdown>
-    </div>
+<div class="row form-group">
+  <label for="select-output" class="col-3">Select output</label>
+  <div class="col-3">
+    <ng-multiselect-dropdown [placeholder]="'Select output'" [data]="currencies" [(ngModel)]="outputCurSelected" [settings]="dropdownSettingsMultiple"
+      class="form-control p-0" required #outputCurFormControl="ngModel" (onSelect)="outputCurAdded()">
+    </ng-multiselect-dropdown>
   </div>
+</div>
+<div *ngIf="formState.outputCurSelected.errors.length > 0 && formState.outputCurSelected.touched" class="alert alert-danger">
+  At least two ccy must be provided
+</div>
 
-  <div class="row form-group">
-    <label for="select-chart-type" class="col-3">Select chart type</label>
-    <div class="col-3">
-      <!-- <ss-multiselect-dropdown #multiSelecChartType (dropdownOpened)="chartOpened(multiSelecChartType)" [options]="chartTypes"
-      [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="chartTypeSelected" id="select-chart-type" (ngModelChange)="chartChanged()">
-    </ss-multiselect-dropdown> -->
-      <ng-multiselect-dropdown [placeholder]="'Select chart type'" [data]="chartTypes" [(ngModel)]="chartTypeSelected" [settings]="dropdownSettingsSingle"
-        (onSelect)="onChartSelected($event)">
-      </ng-multiselect-dropdown>
-    </div>
+<div class="row form-group">
+  <label for="select-chart-type" class="col-3">Select chart type</label>
+  <div class="col-3">
+    <ng-multiselect-dropdown [placeholder]="'Select chart type'" [data]="chartTypes" [(ngModel)]="chartTypeSelected" [settings]="dropdownSettingsSingle"
+      class="form-control p-0" required #chartTypeFormControl="ngModel" (onSelect)="onChartSelected()">
+    </ng-multiselect-dropdown>
   </div>
+</div>
+<div *ngIf="chartTypeFormControl.invalid && formState.chartType.touched" class="alert alert-danger">
+  You must select chart type
+</div>
 
-  <div class="row form-group">
-    <label for="start-date" class="col-3">Start date</label>
-    <div class="col-3" id="start-date">
-      <ng-datepicker [(ngModel)]="startDate"></ng-datepicker>
-    </div>
-  </div>
 
-  <div class="row form-group">
-    <label for="end-date" class="col-3">End date</label>
-    <div class="col-3" id="end-date">
-      <ng-datepicker [(ngModel)]="endDate"></ng-datepicker>
-    </div>
+<div class="row form-group">
+  <label for="start-date" class="col-3">Start date</label>
+  <div class="col-3" id="start-date">
+    <ng-datepicker #startDateForm="ngModel" [(ngModel)]="startDate" (ngModelChange)="startDateChanged()"></ng-datepicker>
   </div>
+</div>
 
-  <div class="row form-group">
-    <div class="col-12">
-      <timeframe-buttons (selected)="setDate($event)"></timeframe-buttons>
-    </div>
-  </div>
+<div *ngIf="formState.startDate.errors.length > 0 && formState.startDate.touched" class="alert alert-danger">
+  Invalid date
+</div>
 
-  <div class="row form-group">
-    <div class="col">
-      <button type="button"  disabled (click)="createChart()" class="btn btn-success">Create</button>
-    </div>
+<div class="row form-group">
+  <label for="end-date" class="col-3">End date</label>
+  <div class="col-3" id="end-date">
+    <ng-datepicker #endDateForm="ngModel" class="form-control p-0" [(ngModel)]="endDate" (ngModelChange)="endDateChanged()"></ng-datepicker>
   </div>
+</div>
+
+<div *ngIf="formState.endDate.errors.length > 0 && formState.endDate.touched" class="alert alert-danger">
+  Invalid date
+</div>
+
+<div class="row form-group">
+  <div class="col-12">
+    <timeframe-buttons (selected)="setDate($event)"></timeframe-buttons>
+  </div>
+</div>
+
+<div *ngIf="formState.other.errors.length > 0 && formState.chartType.touched" class="alert alert-danger">
+  Input ccy is present in output for pair data
+</div>
+
+<div class="row form-group">
+  <div class="col">
+    <button type="button" [disabled]="ifFormInvalid()" (click)="createChart()" class="btn btn-success">Create</button>
+  </div>
+</div>
