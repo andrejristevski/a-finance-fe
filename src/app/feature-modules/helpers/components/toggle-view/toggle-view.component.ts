@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-toggle-view',
@@ -8,19 +8,23 @@ import { Component, OnInit } from '@angular/core';
 export class ToggleViewComponent implements OnInit {
 
   isShowing = true;
-  label = 'Hide';
+  @Input() name = '';
+
+  label;
+
 
   constructor() { }
 
   ngOnInit() {
+    this.label = `Hide ${this.name}`;
   }
 
   toogleView() {
     this.isShowing = !this.isShowing;
     if (this.isShowing) {
-      this.label = 'Hide';
+      this.label = `Hide ${this.name}`;
     } else {
-      this.label = 'Show';
+      this.label = `Show ${this.name}`;
     }
   }
 }

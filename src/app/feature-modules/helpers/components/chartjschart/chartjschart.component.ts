@@ -25,7 +25,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
   chartType: any;
 
   delete(id) {
-    debugger;
     console.log(`deleting  ${id}`);
     this.chartService.deleteChart(id, this.chartType);
   }

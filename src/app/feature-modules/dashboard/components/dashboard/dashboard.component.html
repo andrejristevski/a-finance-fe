@@ -1,23 +1,22 @@
 <div class="ml-4">
-  <div class="row">
-
+  <div class="row mt-2">
     <div class="col text-right ">
-      <button (click)="saveCharts()" class="btn btn-secondary ">Save chart settings</button>
-      <!-- <button (click)="debbugingPurposes()" class="btn btn-secondary ">test btn</button> -->
+      <button (click)="saveCharts()" class="btn btn-primary ">Save chart settings</button>
     </div>
   </div>
 
   <div class="mt-2">
-    <app-toggle-view>
+    <app-toggle-view name="create chart">
       <div class="row">
         <app-create-chart class="col-12"></app-create-chart>
       </div>
     </app-toggle-view>
   </div>
-  <hr>
 
   <div class="row">
-    <app-chartjschart *ngFor="let chart of charts" [(data)]="chart.data" [(id)]="chart.id" class="col-12" [chartType]="'chtype-rates-chart'">
-    </app-chartjschart>
+    <div class="p-1 mt-2 bg-light col-12" *ngFor="let chart of charts">
+      <app-chartjschart  [(data)]="chart.data" [(id)]="chart.id"  [chartType]="'chtype-rates-chart'">
+      </app-chartjschart>
+    </div>
   </div>
 </div>

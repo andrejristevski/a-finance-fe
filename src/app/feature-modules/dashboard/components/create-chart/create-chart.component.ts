@@ -235,7 +235,6 @@ export class CreateChartComponent implements OnInit {
   }
 
   validateDateOverlapping() {
-    debugger;
     if (this.isSecondDateEarlierThanFirst(this.startDate, this.endDate)) {
       this.formState.startDate.errors.push('Invalid date');
       return true;
@@ -244,7 +243,6 @@ export class CreateChartComponent implements OnInit {
   }
 
   validateFeautureDate() {
-    debugger;
     if (this.isSecondDateEarlierThanFirst(this.startDate, new Date())) {
       this.formState.startDate.errors.push('Invalid date');
       return true;

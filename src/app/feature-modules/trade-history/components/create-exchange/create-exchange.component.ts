@@ -70,7 +70,6 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   }
 
   formControlChanged(e) {
-    debugger;
   }
   getIMultiSelectOptionFromStringArray(values) {
     const res = [];
@@ -85,7 +84,6 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    debugger;
     this.datepicker.elementRef.nativeElement.children[0].children[0].style.width = '100%';
   }
 
