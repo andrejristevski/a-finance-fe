@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CreateChartComponent } from './components/create-chart/create-chart.component';
 import { TimeframeButtonsComponent } from './components/timeframe-buttons/timeframe-buttons.component';
@@ -18,7 +18,8 @@ import { HelpersModule } from '../helpers/helpers.module';
     FormsModule,
     NgDatepickerModule,
     HelpersModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   declarations: [DashboardComponent, CreateChartComponent, 
     TimeframeButtonsComponent]

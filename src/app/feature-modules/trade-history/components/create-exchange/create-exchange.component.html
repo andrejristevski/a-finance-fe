@@ -3,18 +3,22 @@
   <div class="row form-group">
     <label for="input-cur" class="col-3">From</label>
     <div class="col-3">
-      <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="inpCurSelected"
+      <!-- <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="inpCurSelected"
         id="input-cur">
-      </ss-multiselect-dropdown>
+      </ss-multiselect-dropdown> -->
+      <ng-multiselect-dropdown [placeholder]="'Select input'" [data]="currencies" [(ngModel)]="inpCurSelected" [settings]="dropdownSettingsSingle">
+        </ng-multiselect-dropdown>
     </div>
   </div>
 
   <div class="row  form-group">
     <label for="out-cur" class="col-3 ">To</label>
     <div class="col-3 ">
-      <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="outCurSelected"
+      <!-- <ss-multiselect-dropdown [options]="inputCurrencies" [texts]="inpCurTexts" [settings]="inpCurSettings" [(ngModel)]="outCurSelected"
         id="out-cur">
-      </ss-multiselect-dropdown>
+      </ss-multiselect-dropdown> -->
+      <ng-multiselect-dropdown [placeholder]="'Select input'" [data]="currencies" [(ngModel)]="outputCurSelected" [settings]="dropdownSettingsSingle">
+        </ng-multiselect-dropdown>
     </div>
   </div>
 

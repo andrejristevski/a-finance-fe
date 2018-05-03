@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from './feature-modules/login/login.module';
 import { AppComponent } from './app.component';
@@ -31,17 +32,18 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     HttpModule,
     HttpClientModule,
     SnotifyModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot(),
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard, ChartService, NetworkService, 
+  providers: [AuthService, AuthGuard, ChartService, NetworkService,
     UserSettingsService,
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService,
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: TokenInterceptor, 
-      multi: true 
-  } 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

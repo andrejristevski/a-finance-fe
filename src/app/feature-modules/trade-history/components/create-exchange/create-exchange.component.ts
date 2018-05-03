@@ -13,38 +13,34 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   constructor(
     private userDataService: UserSettingsService) { }
 
-  inpCurSelected: number[];
-  outCurSelected: number[];
-  inputCurrencies: IMultiSelectOption[];
+  inpCurSelected = [];
+  outputCurSelected = [];
+  currencies = [];
   sum;
   exchangeRate;
   date = new Date();
 
   @ViewChild('datepick') datepicker: any;
 
-  inpCurSettings: IMultiSelectSettings = {
-    checkedStyle: 'fontawesome',
-    buttonClasses: 'btn btn-default btn-block',
-    dynamicTitleMaxItems: 1,
-    selectionLimit: 1,
-    autoUnselect: true,
-  };
-
-  inpCurTexts: IMultiSelectTexts = {
-    checkAll: 'Select all',
-    uncheckAll: 'Unselect all',
-    checked: 'item selected',
-    checkedPlural: 'items selected',
-    searchPlaceholder: 'Find',
-    searchEmptyResult: 'Nothing found...',
-    searchNoRenderText: 'Type in search box to see results...',
-    defaultTitle: 'Select currency',
-    allSelected: 'All selected',
+  dropdownSettingsSingle = {
+    singleSelection: true,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: false,
   };
 
   ngOnInit() {
-    this.inputCurrencies = this.
-      getIMultiSelectOptionFromStringArray(PercentageSumCur);
+    PercentageSumCur.forEach((ccy, i) => {
+      this.currencies.push(
+        {
+          item_id: i + 1,
+          item_text: ccy,
+        }
+      );
+    });
   }
 
   getIMultiSelectOptionFromStringArray(values) {
@@ -64,11 +60,12 @@ export class CreateExchangeComponent implements OnInit, AfterViewInit {
   }
 
   createExchange() {
+    debugger;
     const exchange = {
       sum: this.sum,
       exchangeRate: this.exchangeRate,
-      inputCcy: this.inputCurrencies[this.inpCurSelected[0]].name,
-      outCcy: this.inputCurrencies[this.outCurSelected[0]].name,
+      inputCcy: this.inpCurSelected[0].item_text,
+      outCcy: this.outputCurSelected[0].item_text,
       date: this.date.toISOString().split('T')[0],
       balance: this.sum * this.exchangeRate
     };

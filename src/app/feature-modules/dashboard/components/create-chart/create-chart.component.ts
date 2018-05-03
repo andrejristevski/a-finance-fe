@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ChartService } from '../../../../services/chart.service';
 import { IMultiSelectOption, IMultiSelectTexts, IMultiSelectSettings } from 'angular-2-dropdown-multiselect';
 import { SnotifyService } from 'ng-snotify';
@@ -10,82 +10,65 @@ import { debug } from 'util';
   templateUrl: './create-chart.component.html',
   styleUrls: ['./create-chart.component.scss']
 })
-export class CreateChartComponent implements OnInit, AfterViewInit {
+export class CreateChartComponent implements OnInit {
 
   constructor(private chartService: ChartService,
     private notif: SnotifyService) {
   }
 
-  @ViewChild('multiSelecInput') multiSelecInput;
-  @ViewChild('multiSelecOutput') multiSelecOutput;
-  @ViewChild('multiSelecChartType') multiSelectChartType;
-
   today = new Date();
   startDate: any = (new Date()).setDate(this.today.getDate() - 1);
   endDate: any = new Date(this.today);
 
-  chartTypeSelected: number[] = [0];
-  chartTypes: IMultiSelectOption[];
+  chartTypes;
+  currencies;
 
-  inpCurSelected: number[] = [0];
-  inputCurrencies: IMultiSelectOption[];
+  inpCurSelected = [];
+  outputCurSelected = [];
+  chartTypeSelected = [];
 
-  outputCurSelected: number[] = [2];
-  outputCurrencies: IMultiSelectOption[];
 
-  inpCurTexts: IMultiSelectTexts = {
-    checkAll: 'Select all',
-    uncheckAll: 'Unselect all',
-    checked: 'item selected',
-    checkedPlural: 'items selected',
-    searchPlaceholder: 'Find',
-    searchEmptyResult: 'Nothing found...',
-    searchNoRenderText: 'Type in search box to see results...',
-    defaultTitle: 'Select currency',
-    allSelected: 'All selected',
+  dropdownSettingsMultiple = {
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: false
   };
 
-  inpCurSettings: IMultiSelectSettings = {
-    checkedStyle: 'fontawesome',
-    buttonClasses: 'btn btn-default btn-block',
-    dynamicTitleMaxItems: 1,
-    selectionLimit: 1,
-    autoUnselect: true,
+  dropdownSettingsSingle = {
+    singleSelection: true,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: false,
   };
 
-  outCurSettings: IMultiSelectSettings = {
-    checkedStyle: 'fontawesome',
-    buttonClasses: 'btn btn-default btn-block',
-    itemClasses: 'text-dark bg-light',
-    showCheckAll: true,
-    showUncheckAll: true,
-  };
+  onItemSelect(item: any) {
+    console.log(item);
+  }
+  onSelectAll(items: any) {
+    console.log(items);
+  }
 
   ngOnInit() {
-    this.inputCurrencies =
-      this.getIMultiSelectOptionFromStringArray(PercentageSumCur);
-    this.outputCurrencies =
-      this.getIMultiSelectOptionFromStringArray(PercentageSumCur);
+    this.currencies = [];
+    PercentageSumCur.forEach((ccy, i) => {
+      this.currencies.push(
+        {
+          item_id: i + 1,
+          item_text: ccy,
+        }
+      );
+    });
+
     this.chartTypes =
       this.getIMultiSelectOptionFromStringArray(Object.keys(ChartType)
         .map(key => ChartType[key]));
-  }
-
-
-  ngAfterViewInit() {
-
-  }
-
-  chartChanged() {
-    this.inpCurSelected = [0];
-    this.outputCurSelected = [2];
-  }
-
-  chartOpened(element) {
-  }
-
-
-  onChange() {
   }
 
   setDate(monts) {
@@ -97,13 +80,6 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
     return date;
   }
 
-  a(monts) {
-    this.chartService.createDefault();
-  }
-
-  post() {
-    this.notif.success('Success', notificationOptions);
-  }
 
   createChart() {
     const { inpCur, outCurrencies, chartTypeString } = this.getMappedCallValues();
@@ -120,11 +96,11 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
   getMappedCallValues() {
 
     const inpCur = this.inpCurSelected
-      .map(index => this.inputCurrencies[index].name)[0];
+      .map(ccy => ccy.item_text)[0];
     const outCurrencies = this.outputCurSelected
-      .map(index => this.outputCurrencies[index].name);
+      .map(ccy => ccy.item_text);
     const chartTypeString = this.chartTypeSelected
-      .map(index => this.chartTypes[index].name)[0];
+      .map(ccy => ccy.item_text)[0];
 
     return { inpCur, outCurrencies, chartTypeString };
   }
@@ -134,8 +110,8 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
     values.forEach((element, i) => {
       res.push(
         {
-          id: i,
-          name: element
+          item_id: i + 1,
+          item_text: element,
         });
     });
     return res;
