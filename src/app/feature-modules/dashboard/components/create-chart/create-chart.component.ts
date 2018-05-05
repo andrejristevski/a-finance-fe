@@ -190,6 +190,7 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
     this.resetErrors();
     if (
       this.validateOneInputCcyError()
+      || this.validateOneOutputCcyError()
       || this.validateChartTypeError()
       || this.validateSameCcyError()
       || this.validateDateOverlapping()
@@ -215,6 +216,14 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
   validateOneInputCcyError() {
     if (this.inpCurSelected.length === 0) {
       this.formState.inpCurSelected.errors.push('Input ccy is not selected');
+      return true;
+    }
+    return false;
+  }
+
+  validateOneOutputCcyError() {
+    if (this.outputCurSelected.length === 0) {
+      this.formState.outputCurSelected.errors.push('Output ccy is not selected');
       return true;
     }
     return false;
@@ -291,12 +300,13 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
   }
 
   ifFormInvalid() {
-
+    debugger;
     if (this.chartTypeSelected[0] && this.chartTypeSelected[0].item_text === ChartType['PAIR']) {
       return this.validateChartPair();
     } else if (this.chartTypeSelected[0]) {
       return this.validateStrength();
     }
+
     return true;
   }
 }
