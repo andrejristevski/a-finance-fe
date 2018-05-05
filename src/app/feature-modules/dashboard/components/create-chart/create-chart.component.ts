@@ -34,7 +34,10 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
     },
     outputCurSelected: {
       touched: false,
-      errors: []
+      errors: {
+        twoCurSelected: false,
+        oneCurSelected: false
+      }
     },
     chartType: {
       touched: false,
@@ -177,7 +180,10 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
 
   resetErrors() {
     this.formState.inpCurSelected.errors = [];
-    this.formState.outputCurSelected.errors = [];
+    this.formState.outputCurSelected.errors = {
+      twoCurSelected: false,
+      oneCurSelected: false
+    };
     this.formState.chartType.errors = [];
     this.formState.other.errors = [];
     this.formState.startDate.errors = [];
@@ -223,7 +229,7 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
 
   validateOneOutputCcyError() {
     if (this.outputCurSelected.length === 0) {
-      this.formState.outputCurSelected.errors.push('Output ccy is not selected');
+      this.formState.outputCurSelected.errors.oneCurSelected = true;
       return true;
     }
     return false;
@@ -231,7 +237,7 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
 
   validateTwoOutputCcyError() {
     if (this.outputCurSelected.length < 2) {
-      this.formState.outputCurSelected.errors.push('At least two ccy must be selected');
+      this.formState.outputCurSelected.errors.twoCurSelected = true;
       return true;
     }
     return false;
