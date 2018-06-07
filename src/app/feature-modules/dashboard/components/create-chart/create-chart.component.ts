@@ -306,7 +306,6 @@ export class CreateChartComponent implements OnInit, AfterViewInit {
   }
 
   ifFormInvalid() {
-    debugger;
     if (this.chartTypeSelected[0] && this.chartTypeSelected[0].item_text === ChartType['PAIR']) {
       return this.validateChartPair();
     } else if (this.chartTypeSelected[0]) {
