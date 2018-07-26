@@ -1,6 +1,7 @@
 # AndrejFinanceFe
 
 First you need to have the BE running with downloaded data.
+The back end can be found [here](https://github.com/andrejristevski/a-finance-be)
 
 After that you can use ```ng serve```
 
